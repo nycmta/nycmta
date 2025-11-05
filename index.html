@@ -418,17 +418,13 @@ Dataset on NY Open Data</a></li>
 <ul>
 <li>2024: <a
 href="data/mta_ridership_full/ridership_2024_manhattan.csv"><code>data/mta_ridership_full/ridership_2024_manhattan.csv</code></a>
-(1,068,507 records, 64.6 MB)</li>
+(1,068,507 records, 65 MB)</li>
 <li>2025: <a
 href="data/mta_ridership_full/ridership_2025_manhattan.csv"><code>data/mta_ridership_full/ridership_2025_manhattan.csv</code></a>
-(852,656 records, 51.6 MB)</li>
+(852,656 records, 52 MB)</li>
 <li>Time span: January 2024 - October 2025 (22 months)</li>
 <li>Coverage: 123 Manhattan stations, 1.92M hourly observations</li>
 </ul></li>
-<li>Sample data: <a
-href="data/mta_ridership/mta_hourly_2020_2024_sample.csv"><code>data/mta_ridership/mta_hourly_2020_2024_sample.csv</code></a>,
-<a
-href="data/mta_ridership/mta_hourly_2025_sample.csv"><code>data/mta_ridership/mta_hourly_2025_sample.csv</code></a></li>
 </ul></li>
 <li><em>Data Dictionary and Documentation:</em>
 <ul>
@@ -464,15 +460,9 @@ href="https://www.ncei.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:USW0009472
 Climate Data Online</a></li>
 <li>Central Park is located in Manhattan, providing consistent weather
 measurements for all Manhattan stations</li>
-<li>Downloaded data (2020-2025):
-<ul>
-<li><a
+<li>Downloaded data (2020-2025): <a
 href="data/weather/central_park_weather_wide.csv"><code>data/weather/central_park_weather_wide.csv</code></a>
-(one row per date, 1,976 days)</li>
-<li><a
-href="data/weather/central_park_weather_long.csv"><code>data/weather/central_park_weather_long.csv</code></a>
-(long format)</li>
-</ul></li>
+(one row per date, 1,642 days)</li>
 <li>Variables: TMAX (max temp °F), PRCP (precipitation inches), SNOW
 (snowfall inches)</li>
 </ul></li>
@@ -485,8 +475,11 @@ permits (parades, street fairs, etc.)
 <li><a
 href="https://data.cityofnewyork.us/City-Government/NYC-Permitted-Event-Information/tvpp-9vvx">Dataset
 on NYC Open Data</a></li>
-<li>Downloaded data (2020-present, 10,000 events): <a
-href="data/events/nyc_permitted_events.csv"><code>data/events/nyc_permitted_events.csv</code></a></li>
+<li>Downloaded data (2024-2025): <a
+href="data/events/nyc_large_events_2024_2025.csv"><code>data/events/nyc_large_events_2024_2025.csv</code></a>
+(149,524 records, 41 MB)</li>
+<li>Source file: <a
+href="data/documentation/NYC_Permitted_Events.xlsx"><code>data/documentation/NYC_Permitted_Events.xlsx</code></a></li>
 <li>Analysis will filter to Manhattan events or spatially join to
 Manhattan stations</li>
 </ul></li>
@@ -505,8 +498,8 @@ href="data/download_full_ridership_monthly.R"><code>data/download_full_ridership
 (Manhattan ridership), <a
 href="data/download_noaa_weather.R"><code>data/download_noaa_weather.R</code></a>
 (weather), and <a
-href="data/download_stations_events.R"><code>data/download_stations_events.R</code></a>
-(stations and events).</p>
+href="data/download_historical_events_monthly.R"><code>data/download_historical_events_monthly.R</code></a>
+(events).</p>
 </blockquote>
 </div>
 <div id="planned-analyses-and-visualizations" class="section level2">

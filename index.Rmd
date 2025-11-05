@@ -33,11 +33,10 @@ Transit demand in New York City fluctuates with **extreme weather** events (heat
   - [2020-2024 Dataset on NY Open Data](https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s)
   - [2025+ Dataset on NY Open Data](https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-January-1-20/5wq4-mkjj)
   - **Complete data (Manhattan only):**
-    - 2024: [`data/mta_ridership_full/ridership_2024_manhattan.csv`](data/mta_ridership_full/ridership_2024_manhattan.csv) (1,068,507 records, 64.6 MB)
-    - 2025: [`data/mta_ridership_full/ridership_2025_manhattan.csv`](data/mta_ridership_full/ridership_2025_manhattan.csv) (852,656 records, 51.6 MB)
+    - 2024: [`data/mta_ridership_full/ridership_2024_manhattan.csv`](data/mta_ridership_full/ridership_2024_manhattan.csv) (1,068,507 records, 65 MB)
+    - 2025: [`data/mta_ridership_full/ridership_2025_manhattan.csv`](data/mta_ridership_full/ridership_2025_manhattan.csv) (852,656 records, 52 MB)
     - Time span: January 2024 - October 2025 (22 months)
     - Coverage: 123 Manhattan stations, 1.92M hourly observations
-  - Sample data: [`data/mta_ridership/mta_hourly_2020_2024_sample.csv`](data/mta_ridership/mta_hourly_2020_2024_sample.csv), [`data/mta_ridership/mta_hourly_2025_sample.csv`](data/mta_ridership/mta_hourly_2025_sample.csv)
 * *Data Dictionary and Documentation:*
   - MTA Ridership Data Overview: [`data/documentation/MTA_Overview.pdf`](data/documentation/MTA_Overview.pdf)
   - MTA Data Dictionary: [`data/documentation/MTA_DataDictionary.pdf`](data/documentation/MTA_DataDictionary.pdf)
@@ -55,21 +54,20 @@ Transit demand in New York City fluctuates with **extreme weather** events (heat
 * *NOAA GHCN-Daily — Central Park Station* (station ID: USW00094728): daily maximum temperature, precipitation, and snowfall
   - [NOAA Climate Data Online](https://www.ncei.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:USW00094728/detail)
   - Central Park is located in Manhattan, providing consistent weather measurements for all Manhattan stations
-  - Downloaded data (2020-2025):
-    - [`data/weather/central_park_weather_wide.csv`](data/weather/central_park_weather_wide.csv) (one row per date, 1,976 days)
-    - [`data/weather/central_park_weather_long.csv`](data/weather/central_park_weather_long.csv) (long format)
+  - Downloaded data (2020-2025): [`data/weather/central_park_weather_wide.csv`](data/weather/central_park_weather_wide.csv) (one row per date, 1,642 days)
   - Variables: TMAX (max temp °F), PRCP (precipitation inches), SNOW (snowfall inches)
 
 **Events (date and location):**
 
 * *NYC Permitted Event Information* — historical and current permits (parades, street fairs, etc.)
   - [Dataset on NYC Open Data](https://data.cityofnewyork.us/City-Government/NYC-Permitted-Event-Information/tvpp-9vvx)
-  - Downloaded data (2020-present, 10,000 events): [`data/events/nyc_permitted_events.csv`](data/events/nyc_permitted_events.csv)
+  - Downloaded data (2024-2025): [`data/events/nyc_large_events_2024_2025.csv`](data/events/nyc_large_events_2024_2025.csv) (149,524 records, 41 MB)
+  - Source file: [`data/documentation/NYC_Permitted_Events.xlsx`](data/documentation/NYC_Permitted_Events.xlsx)
   - Analysis will filter to Manhattan events or spatially join to Manhattan stations
 
 > **Note:** We focus on Manhattan for 2024-2025 due to data availability and analysis feasibility. Manhattan hosts the majority of major NYC events (Times Square, Central Park, etc.) and has consistent weather monitoring, making it ideal for studying weather and event impacts on ridership.
 
-> **Note:** Complete data has been downloaded and is available in the `data/` directory. Download scripts: [`data/download_full_ridership_monthly.R`](data/download_full_ridership_monthly.R) (Manhattan ridership), [`data/download_noaa_weather.R`](data/download_noaa_weather.R) (weather), and [`data/download_stations_events.R`](data/download_stations_events.R) (stations and events).
+> **Note:** Complete data has been downloaded and is available in the `data/` directory. Download scripts: [`data/download_full_ridership_monthly.R`](data/download_full_ridership_monthly.R) (Manhattan ridership), [`data/download_noaa_weather.R`](data/download_noaa_weather.R) (weather), and [`data/download_historical_events_monthly.R`](data/download_historical_events_monthly.R) (events).
 
 ## Planned Analyses and Visualizations
 
