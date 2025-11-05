@@ -208,7 +208,8 @@ events_analysis <- events %>%
       str_detect(tolower(event_borough), "manhattan") ~ "Manhattan",
       str_detect(tolower(event_borough), "brooklyn") ~ "Brooklyn",
       str_detect(tolower(event_borough), "queens") ~ "Queens",
-      str_detect(tolower(event_borough), "bronx") ~ "Bronx",
+      str_detect(tolower(event_borough), "bronx") ~ "The Bronx",
+      str_detect(tolower(event_borough), "staten island") ~ "Staten Island",
       TRUE ~ "Other"
     )
   )
