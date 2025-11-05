@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="William M. Donovan (wd2328), Hantang Qin (hq2229), Yongyan Liu (yl6107), Yijun Wang (yw4664), Heng Hu (hh2648)" />
+
+<meta name="date" content="2025-11-05" />
+
+<title>Project Proposal</title>
+
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">NYC Subway & Weather</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Project Proposal</h1>
+<h4 class="author">William M. Donovan (wd2328), Hantang Qin (hq2229),
+Yongyan Liu (yl6107), Yijun Wang (yw4664), Heng Hu (hh2648)</h4>
+<h4 class="date">2025-11-05</h4>
+
+</div>
+
+
+<div id="tentative-title" class="section level2">
+<h2>Tentative Title</h2>
+<p><em>Weather, Storms, and Big Events: Station-Level Impacts on NYC
+Subway Ridership</em></p>
+</div>
+<div id="motivation" class="section level2">
+<h2>Motivation</h2>
+<p>Transit demand in New York City fluctuates with <strong>extreme
+weather</strong> events (heat waves, heavy rain, and snowstorms) and
+<strong>large-scale events</strong> (parades, holiday gatherings, and
+Times Square festivities). This project aims to quantify
+<strong>station-level</strong> ridership changes associated with weather
+conditions and permitted events from 2020 to 2025. Our findings will
+inform service planning, system resilience, and rider
+communications.</p>
+</div>
+<div id="initial-questions" class="section level2">
+<h2>Initial Questions</h2>
+<ol style="list-style-type: decimal">
+<li>How do <strong>heat waves</strong> and <strong>storms</strong>
+affect <strong>station-day</strong> ridership, and which stations are
+most impacted?</li>
+<li>Do <strong>large events</strong> create detectable
+<strong>station-hour</strong> ridership spikes near event venues and
+routes?</li>
+<li>Are these effects heterogeneous across <strong>boroughs</strong>,
+<strong>station types</strong> (transfer hubs vs. local stations), and
+<strong>weekday/weekend</strong> patterns?</li>
+</ol>
+<p><em>Note: We will prioritize questions 1–2; time permitting, we will
+explore clustering of station response patterns.</em></p>
+</div>
+<div id="data-sources" class="section level2">
+<h2>Data Sources</h2>
+<p><strong>Ridership (station-level, hourly):</strong></p>
+<ul>
+<li><em>MTA Subway Hourly Ridership: 2020–2024</em> — dataset ID:
+<code>wujg-7c2s</code></li>
+<li><em>MTA Subway Hourly Ridership: Beginning 2025–</em> — dataset ID:
+<code>5wq4-mkjj</code></li>
+</ul>
+<p><strong>Station geocoding:</strong></p>
+<ul>
+<li><em>MTA station complexes with coordinates</em> (Complex IDs align
+with hourly ridership)</li>
+</ul>
+<p><strong>Weather (daily):</strong></p>
+<ul>
+<li><em>NOAA GHCN-Daily — Central Park Station</em> (station ID:
+USW00094728): daily maximum temperature, precipitation, and
+snowfall</li>
+</ul>
+<p><strong>Events (date and location):</strong></p>
+<ul>
+<li><em>NYC Permitted Event Information</em> — historical and current
+permits (parades, street fairs, etc.)</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> We will not use the deprecated “MTA Daily
+Ridership 2020–2025” dataset, as it provides systemwide totals only
+without station-level detail.</p>
+</blockquote>
+</div>
+<div id="planned-analyses-and-visualizations" class="section level2">
+<h2>Planned Analyses and Visualizations</h2>
+<p><strong>Data Wrangling</strong></p>
+<ul>
+<li>Pull hourly ridership data via Socrata API and build
+<strong>station-day</strong> aggregates (retain
+<strong>station-hour</strong> granularity for event window
+analyses).</li>
+<li>Merge GHCN-Daily weather data and create the following indicators:
+<ul>
+<li><code>heatwave</code>: maximum temperature ≥ 90°F for ≥ 3
+consecutive days (with sensitivity checks for alternative
+thresholds)</li>
+<li><code>storm</code>: daily precipitation ≥ 1 inch (with alternative
+thresholds in sensitivity analyses)</li>
+</ul></li>
+<li>Ingest permitted events data and spatially join to the
+<strong>nearest station complex</strong> (e.g., within 600–800 meters),
+flagging <code>event_day</code> and hourly event windows.</li>
+</ul>
+<p><strong>Exploratory Data Analysis (EDA)</strong></p>
+<ul>
+<li>Calendar heatmaps for high-traffic stations, small-multiple time
+series plots, and borough-faceted visualizations.</li>
+<li>Choropleth maps showing percent change in station-day entries during
+heat waves, storms, and event days relative to baseline conditions.</li>
+</ul>
+<p><strong>Modeling Approach (Fixed Effects)</strong></p>
+<ul>
+<li>Within-station fixed effects models controlling for station and date
+fixed effects:</li>
+</ul>
+<p><strong>Spec A — with date fixed effects (preferred):</strong></p>
+<p><span class="math display">\[
+\log\!\big(\text{entries}_{s,d}\big)
+= \beta_{1}\,\text{heatwave}_{d}
++ \beta_{2}\,\text{precip}_{d}
++ \beta_{3}\,\text{event}_{s,d}
++ \alpha_{s}
++ \gamma_{d}
++ \varepsilon_{s,d}.
+\]</span></p>
+<p><strong>Spec B — without date fixed effects (lighter; includes
+DOW/month):</strong></p>
+<p><span class="math display">\[
+\log\!\big(\text{entries}_{s,d}\big)
+= \beta_{1}\,\text{heatwave}_{d}
++ \beta_{2}\,\text{precip}_{d}
++ \beta_{3}\,\text{event}_{s,d}
++ \delta_{\text{DOW}(d)}
++ \mu_{\text{month}(d)}
++ \alpha_{s}
++ \varepsilon_{s,d}.
+\]</span></p>
+<ul>
+<li>Hourly event-window models for selected venues and transit
+routes.</li>
+<li><strong>Sensitivity analyses:</strong> alternative weather
+thresholds, pandemic period indicators, and exclusion of
+pandemic-affected periods.</li>
+</ul>
+<p><strong>Stretch Goals (Time Permitting)</strong></p>
+<ul>
+<li>Cluster stations by response patterns using k-means or hierarchical
+clustering.</li>
+<li>Develop simple forecasting models (ARIMA or Prophet) for select
+high-traffic stations.</li>
+</ul>
+</div>
+<div id="anticipated-coding-challenges" class="section level2">
+<h2>Anticipated Coding Challenges</h2>
+<ul>
+<li>Managing Socrata API pagination and rate limits for large hourly
+ridership tables.</li>
+<li>Aligning Complex IDs across ridership and station geometry
+datasets.</li>
+<li>Defining clean event windows and handling overlapping event
+permits.</li>
+<li>Accounting for regime changes during the pandemic recovery period
+(2020–2022).</li>
+</ul>
+</div>
+<div id="planned-deliverables" class="section level2">
+<h2>Planned Deliverables</h2>
+<ul>
+<li><strong>GitHub Repository (public):</strong> Scripts for data
+import, cleaning, EDA, and modeling; saved figures; comprehensive
+README; website source files.</li>
+<li><strong>Website (GitHub Pages):</strong> Landing page with project
+overview, results page with interactive visualizations, full written
+report, and embedded screencast (≤ 2 minutes).</li>
+<li><strong>Written Report:</strong> Standalone document covering
+motivation, data sources, exploratory data analysis, statistical
+methods, results, and limitations.</li>
+</ul>
+</div>
+<div id="project-timeline" class="section level2">
+<h2>Project Timeline</h2>
+<ul>
+<li><strong>By Nov 7, 1:00 PM (Proposal Deadline):</strong> Finalize
+team composition and project scope (this document); create repository
+and push initial files.</li>
+<li><strong>Nov 8–12:</strong> Implement initial data pulls; produce
+first exploratory plots; define heat wave, storm, and event
+indicators.</li>
+<li><strong>Nov 10–14 (Project Review Meeting):</strong> Meet with
+teaching team; present a cleaned one-week data sample, 2–3 preliminary
+plots, and a skeleton model.</li>
+<li><strong>Nov 15–30:</strong> Complete full EDA, fit fixed-effects
+models, conduct sensitivity analyses, and draft the full report.</li>
+<li><strong>Dec 1–6 (by 11:59 PM):</strong> Polish report and website;
+record screencast (≤ 2 minutes); submit final deliverable links.</li>
+<li><strong>Dec 11:</strong> In-class project discussion.</li>
+</ul>
+</div>
+<div id="team-member-roles" class="section level2">
+<h2>Team Member Roles</h2>
+<ul>
+<li><strong>Data Wrangling and API Integration:</strong> TBD</li>
+<li><strong>Exploratory Data Analysis and Visualization:</strong>
+TBD</li>
+<li><strong>Statistical Modeling and Diagnostics:</strong> TBD</li>
+<li><strong>Website Development and Screencast Production:</strong>
+TBD</li>
+<li><strong>Project Management and Quality Assurance (repo hygiene, PR
+reviews):</strong> TBD</li>
+</ul>
+</div>
+<div id="optional-minimal-feasibility-check" class="section level2">
+<h2>(Optional) Minimal Feasibility Check</h2>
+<blockquote>
+<p>The following code provides a basic smoke test for data retrieval.
+Uncomment and adapt as needed before the project review meeting.</p>
+<p><strong>Required packages:</strong> <code>tidyverse</code>,
+<code>httr</code>, <code>jsonlite</code>, <code>sf</code>,
+<code>lubridate</code></p>
+</blockquote>
+<pre class="r"><code>base_url &lt;- &quot;https://data.ny.gov/resource/wujg-7c2s.json&quot;
+q &lt;- list(
+  &quot;$select&quot; = &quot;complex_id, complex, date, hour_beginning, entries&quot;,
+  &quot;$where&quot;  = &quot;date between &#39;2024-07-01T00:00:00&#39; and &#39;2024-07-07T23:59:59&#39; AND complex_id in (&#39;R11&#39;,&#39;R14&#39;)&quot;,
+  &quot;$limit&quot;  = 50000
+)
+rid_raw &lt;- jsonlite::fromJSON(
+  httr::content(httr::GET(base_url, query = q), as = &quot;text&quot;, encoding = &quot;UTF-8&quot;)
+)
+rid &lt;- rid_raw %&gt;%
+  dplyr::mutate(date = lubridate::as_date(date), entries = as.numeric(entries)) %&gt;%
+  dplyr::group_by(complex_id, complex, date) %&gt;%
+  dplyr::summarize(entries_day = sum(entries, na.rm = TRUE), .groups = &quot;drop&quot;)</code></pre>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<ul>
+<li>MTA Subway Hourly Ridership (2020–2024), dataset ID:
+<code>wujg-7c2s</code></li>
+<li>MTA Subway Hourly Ridership (Beginning 2025–), dataset ID:
+<code>5wq4-mkjj</code></li>
+<li>NOAA GHCN-Daily — Central Park Station (USW00094728)</li>
+<li>NYC Permitted Event Information (historical and current)</li>
+<li>MTA Station Complexes (geometry and coordinates)</li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

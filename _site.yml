@@ -1,0 +1,17 @@
+name: "NYC MTA Subway Ridership Analysis"
+output_dir: "."
+navbar:
+  title: "NYC Subway & Weather"
+  left:
+    - text: "Home"
+      href: index.html
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    code_folding: hide
+    css: styles.css

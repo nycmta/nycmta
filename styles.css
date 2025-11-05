@@ -1,0 +1,84 @@
+/* Custom styles for NYC MTA project website */
+
+/* Title styling */
+h1.title {
+  color: #2C7BE5;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Author and date styling */
+h4.author, h4.date {
+  color: #444444;
+  font-weight: 600;
+}
+
+/* Heading colors */
+h1, h2, h3 {
+  color: #0FB9B1;
+  margin-top: 30px;
+}
+
+h2 {
+  border-bottom: 2px solid #0FB9B1;
+  padding-bottom: 5px;
+}
+
+/* Link styling */
+a {
+  color: #E67E22;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #CF711F;
+  text-decoration: underline;
+}
+
+/* Code blocks */
+pre {
+  background-color: #f8f9fa;
+  border-left: 3px solid #2C7BE5;
+  padding: 10px;
+}
+
+/* Tables */
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+table th {
+  background-color: #2C7BE5;
+  color: white;
+  padding: 10px;
+}
+
+table td {
+  padding: 8px;
+  border: 1px solid #dee2e6;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid #0FB9B1;
+  padding-left: 15px;
+  color: #666;
+  font-style: italic;
+}
+
+/* TOC styling */
+.tocify {
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+
+.tocify-header {
+  font-weight: 600;
+}
+
+/* Responsive images */
+img {
+  max-width: 100%;
+  height: auto;
+}
