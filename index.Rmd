@@ -1,5 +1,3 @@
-
-
 ---
 title: "Project Proposal"
 author: "William M. Donovan (wd2328), Hantang Qin (hq2229), Yongyan Liu (yl6107), Yijun Wang (yw4664), Heng Hu (hh2648)"
@@ -12,17 +10,17 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 ## Tentative Title
 
-*Weather, Storms, and Big Events: Station-Level Impacts on NYC Subway Ridership*
+*Weather, Storms, and Big Events: Station-Level Impacts on Manhattan Subway Ridership*
 
 ## Motivation
 
-Transit demand in New York City fluctuates with **extreme weather** events (heat waves, heavy rain, and snowstorms) and **large-scale events** (parades, holiday gatherings, and Times Square festivities). This project aims to quantify **station-level** ridership changes associated with weather conditions and permitted events from 2020 to 2025. Our findings will inform service planning, system resilience, and rider communications.
+Transit demand in New York City fluctuates with **extreme weather** events (heat waves, heavy rain, and snowstorms) and **large-scale events** (parades, holiday gatherings, and Times Square festivities). This project aims to quantify **station-level** ridership changes in **Manhattan** associated with weather conditions and permitted events from 2024 to 2025. Manhattan hosts the majority of major NYC events and has consistent weather monitoring through Central Park station, making it ideal for studying these relationships. Our findings will inform service planning, system resilience, and rider communications.
 
 ## Initial Questions
 
-1. How do **heat waves** and **storms** affect **station-day** ridership, and which stations are most impacted?
-2. Do **large events** create detectable **station-hour** ridership spikes near event venues and routes?
-3. Are these effects heterogeneous across **boroughs**, **station types** (transfer hubs vs. local stations), and **weekday/weekend** patterns?
+1. How do **heat waves** and **storms** affect **station-day** ridership in Manhattan, and which stations are most impacted?
+2. Do **large events** create detectable **station-hour** ridership spikes near event venues and routes in Manhattan?
+3. Are these effects heterogeneous across **station types** (transfer hubs vs. local stations) and **weekday/weekend** patterns within Manhattan?
 
 *Note: We will prioritize questions 1–2; time permitting, we will explore clustering of station response patterns.*
 
@@ -30,37 +28,67 @@ Transit demand in New York City fluctuates with **extreme weather** events (heat
 
 **Ridership (station-level, hourly):**
 
-* *MTA Subway Hourly Ridership: 2020–2024* — dataset ID: `wujg-7c2s`
-* *MTA Subway Hourly Ridership: Beginning 2025–* — dataset ID: `5wq4-mkjj`
+* *MTA Subway Hourly Ridership: Manhattan stations, 2024-2025*
+  - Source datasets: `wujg-7c2s` (2024) and `5wq4-mkjj` (2025)
+  - [2020-2024 Dataset on NY Open Data](https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s)
+  - [2025+ Dataset on NY Open Data](https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-January-1-20/5wq4-mkjj)
+  - **Complete data (Manhattan only):**
+    - 2024: [`data/mta_ridership_full/ridership_2024_manhattan.csv`](data/mta_ridership_full/ridership_2024_manhattan.csv) (1,068,507 records, 64.6 MB)
+    - 2025: [`data/mta_ridership_full/ridership_2025_manhattan.csv`](data/mta_ridership_full/ridership_2025_manhattan.csv) (852,656 records, 51.6 MB)
+    - Time span: January 2024 - October 2025 (22 months)
+    - Coverage: 123 Manhattan stations, 1.92M hourly observations
+  - Sample data: [`data/mta_ridership/mta_hourly_2020_2024_sample.csv`](data/mta_ridership/mta_hourly_2020_2024_sample.csv), [`data/mta_ridership/mta_hourly_2025_sample.csv`](data/mta_ridership/mta_hourly_2025_sample.csv)
+* *Data Dictionary and Documentation:*
+  - MTA Ridership Data Overview: [`data/documentation/MTA_Overview.pdf`](data/documentation/MTA_Overview.pdf)
+  - MTA Data Dictionary: [`data/documentation/MTA_DataDictionary.pdf`](data/documentation/MTA_DataDictionary.pdf)
+  - Note: Raw data is disaggregated by fare class category (11+ types) and payment method (OMNY, MetroCard); our downloaded data aggregates across fare types using API-level SUM() for analysis efficiency
 
 **Station geocoding:**
 
-* *MTA station complexes with coordinates* (Complex IDs align with hourly ridership)
+* *MTA station complexes with coordinates* (Station Complex IDs align with hourly ridership)
+  - Extracted from ridership data (476 unique stations across all NYC; 155 in Manhattan)
+  - Downloaded data: [`data/stations/mta_station_complexes.csv`](data/stations/mta_station_complexes.csv)
+  - Analysis will focus on the 123 Manhattan stations with complete 2024-2025 data
 
 **Weather (daily):**
 
 * *NOAA GHCN-Daily — Central Park Station* (station ID: USW00094728): daily maximum temperature, precipitation, and snowfall
+  - [NOAA Climate Data Online](https://www.ncei.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:USW00094728/detail)
+  - Central Park is located in Manhattan, providing consistent weather measurements for all Manhattan stations
+  - Downloaded data (2020-2025):
+    - [`data/weather/central_park_weather_wide.csv`](data/weather/central_park_weather_wide.csv) (one row per date, 1,976 days)
+    - [`data/weather/central_park_weather_long.csv`](data/weather/central_park_weather_long.csv) (long format)
+  - Variables: TMAX (max temp °F), PRCP (precipitation inches), SNOW (snowfall inches)
 
 **Events (date and location):**
 
 * *NYC Permitted Event Information* — historical and current permits (parades, street fairs, etc.)
+  - [Dataset on NYC Open Data](https://data.cityofnewyork.us/City-Government/NYC-Permitted-Event-Information/tvpp-9vvx)
+  - Downloaded data (2020-present, 10,000 events): [`data/events/nyc_permitted_events.csv`](data/events/nyc_permitted_events.csv)
+  - Analysis will filter to Manhattan events or spatially join to Manhattan stations
 
-> **Note:** We will not use the deprecated "MTA Daily Ridership 2020–2025" dataset, as it provides systemwide totals only without station-level detail.
+> **Note:** We focus on Manhattan for 2024-2025 due to data availability and analysis feasibility. Manhattan hosts the majority of major NYC events (Times Square, Central Park, etc.) and has consistent weather monitoring, making it ideal for studying weather and event impacts on ridership.
+
+> **Note:** Complete data has been downloaded and is available in the `data/` directory. Download scripts: [`data/download_full_ridership_monthly.R`](data/download_full_ridership_monthly.R) (Manhattan ridership), [`data/download_noaa_weather.R`](data/download_noaa_weather.R) (weather), and [`data/download_stations_events.R`](data/download_stations_events.R) (stations and events).
 
 ## Planned Analyses and Visualizations
 
 **Data Wrangling**
 
-* Pull hourly ridership data via Socrata API and build **station-day** aggregates (retain **station-hour** granularity for event window analyses).
-* Merge GHCN-Daily weather data and create the following indicators:
+* Load complete hourly ridership data for Manhattan (2024-2025) and build **station-day** aggregates (retain **station-hour** granularity for event window analyses).
+* Merge GHCN-Daily weather data (Central Park) and create the following indicators:
   * `heatwave`: maximum temperature ≥ 90°F for ≥ 3 consecutive days (with sensitivity checks for alternative thresholds)
   * `storm`: daily precipitation ≥ 1 inch (with alternative thresholds in sensitivity analyses)
-* Ingest permitted events data and spatially join to the **nearest station complex** (e.g., within 600–800 meters), flagging `event_day` and hourly event windows.
+* Ingest permitted events data and join to Manhattan station complexes:
+  * **Preferred approach:** Geocode event locations and spatially join to the **nearest station complex** (e.g., within 600–800 meters)
+  * **Alternative approach:** Match events to stations using text-based location matching
+  * Flag `event_day` and hourly event windows
 
 **Exploratory Data Analysis (EDA)**
 
-* Calendar heatmaps for high-traffic stations, small-multiple time series plots, and borough-faceted visualizations.
-* Choropleth maps showing percent change in station-day entries during heat waves, storms, and event days relative to baseline conditions.
+* Calendar heatmaps for high-traffic Manhattan stations, small-multiple time series plots, and station-type comparisons (transfer hubs vs. local).
+* Manhattan maps showing percent change in station-day ridership during heat waves, storms, and event days relative to baseline conditions.
+* Temporal patterns: weekday/weekend differences, seasonal trends, and hour-of-day patterns.
 
 **Modeling Approach (Fixed Effects)**
 
@@ -69,7 +97,7 @@ Transit demand in New York City fluctuates with **extreme weather** events (heat
 **Spec A — with date fixed effects (preferred):**
 
 \[
-\log\!\big(\text{entries}_{s,d}\big)
+\log\!\big(\text{ridership}_{s,d}\big)
 = \beta_{1}\,\text{heatwave}_{d}
 + \beta_{2}\,\text{precip}_{d}
 + \beta_{3}\,\text{event}_{s,d}
@@ -81,7 +109,7 @@ Transit demand in New York City fluctuates with **extreme weather** events (heat
 **Spec B — without date fixed effects (lighter; includes DOW/month):**
 
 \[
-\log\!\big(\text{entries}_{s,d}\big)
+\log\!\big(\text{ridership}_{s,d}\big)
 = \beta_{1}\,\text{heatwave}_{d}
 + \beta_{2}\,\text{precip}_{d}
 + \beta_{3}\,\text{event}_{s,d}
@@ -92,7 +120,7 @@ Transit demand in New York City fluctuates with **extreme weather** events (heat
 \]
 
 * Hourly event-window models for selected venues and transit routes.
-* **Sensitivity analyses:** alternative weather thresholds, pandemic period indicators, and exclusion of pandemic-affected periods.
+* **Sensitivity analyses:** alternative weather thresholds, season-specific effects, and interaction terms for station types (transfer hubs vs. local).
 
 **Stretch Goals (Time Permitting)**
 
@@ -101,10 +129,11 @@ Transit demand in New York City fluctuates with **extreme weather** events (heat
 
 ## Anticipated Coding Challenges
 
-* Managing Socrata API pagination and rate limits for large hourly ridership tables.
+* Managing Socrata API pagination and rate limits for large hourly ridership tables (resolved using API-level aggregation with SUM() and monthly chunking).
 * Aligning Complex IDs across ridership and station geometry datasets.
+* **Geocoding event locations:** Converting text-based event locations to coordinates for spatial joins with Manhattan station complexes (may require NYC geocoding API or text-based matching).
 * Defining clean event windows and handling overlapping event permits.
-* Accounting for regime changes during the pandemic recovery period (2020–2022).
+* Handling missing hourly observations (~1% of expected records due to station closures or maintenance).
 
 ## Planned Deliverables
 
@@ -150,8 +179,6 @@ rid <- rid_raw %>%
   dplyr::mutate(date = lubridate::as_date(date), entries = as.numeric(entries)) %>%
   dplyr::group_by(complex_id, complex, date) %>%
   dplyr::summarize(entries_day = sum(entries, na.rm = TRUE), .groups = "drop")
-
-
 ```
 
 ## References
