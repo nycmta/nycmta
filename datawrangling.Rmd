@@ -423,8 +423,6 @@ if (isTRUE(params$write_outputs)) {
   arrow::write_parquet(panel_station_day_idx,   file.path(out_dir, "panel_station_day_indexed.parquet"))
   arrow::write_parquet(panel_station_hour_idx,  file.path(out_dir, "panel_station_hour_indexed.parquet"))
 
-  readr::write_csv(panel_station_day_filt, file.path(out_dir, "panel_station_day.csv"))
-  readr::write_csv(panel_station_hour,     file.path(out_dir, "panel_station_hour.csv"))
   readr::write_csv(station_lookup,         file.path(out_dir, "station_lookup.csv"))
   readr::write_csv(date_lookup,            file.path(out_dir, "date_lookup.csv"))
   readr::write_csv(hour_lookup,            file.path(out_dir, "hour_lookup.csv"))
