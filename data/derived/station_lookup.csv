@@ -1,0 +1,124 @@
+station_complex_id,station_complex,station_id
+10,"49 St (N,R,W)",1
+103,"Bowery (J,Z)",2
+107,"Broad St (J,Z)",3
+118,3 Av (L),4
+119,1 Av (L),5
+13,"28 St (R,W)",6
+14,"23 St (R,W)",7
+143,Inwood-207 St (A),8
+144,Dyckman St (A),9
+145,190 St (A),10
+146,181 St (A),11
+147,175 St (A),12
+149,163 St-Amsterdam Av (C),13
+150,155 St (C),14
+151,"145 St (A,C,B,D)",15
+152,"135 St (C,B)",16
+153,"125 St (A,C,B,D)",17
+154,"116 St (C,B)",18
+155,"Cathedral Pkwy (110 St) (C,B)",19
+156,"103 St (C,B)",20
+157,"96 St (C,B)",21
+158,"86 St (C,B)",22
+159,"81 St-Museum of Natural History (C,B)",23
+16,"8 St-NYU (R,W)",24
+160,"72 St (C,B)",25
+162,"50 St (C,E)",26
+164,"34 St-Penn Station (A,C,E)",27
+165,"23 St (C,E)",28
+167,"W 4 St-Wash Sq (A,C,E,B,D,F,M)",29
+168,"Spring St (C,E)",30
+169,"Canal St (A,C,E)",31
+17,"Prince St (R,W)",32
+20,"City Hall (R,W)",33
+22,"Rector St (R,W)",34
+220,"155 St (B,D)",35
+222,Roosevelt Island (F),36
+223,"Lexington Av/63 St (F,Q)",37
+224,57 St (F),38
+225,"47-50 Sts-Rockefeller Ctr (B,D,F,M)",39
+228,"23 St (F,M)",40
+231,"Grand St (B,D)",41
+232,2 Av (F),42
+234,East Broadway (F),43
+276,"5 Av/53 St (E,M)",44
+277,"7 Av (E,B,D)",45
+296,Marble Hill-225 St (1),46
+297,215 St (1),47
+298,207 St (1),48
+299,Dyckman St (1),49
+300,191 St (1),50
+301,181 St (1),51
+303,157 St (1),52
+304,145 St (1),53
+305,137 St-City College (1),54
+306,125 St (1),55
+307,116 St-Columbia University (1),56
+308,Cathedral Pkwy (110 St) (1),57
+309,103 St (1),58
+310,"96 St (1,2,3)",59
+311,86 St (1),60
+312,79 St (1),61
+313,"72 St (1,2,3)",62
+314,66 St-Lincoln Center (1),63
+316,50 St (1),64
+318,"34 St-Penn Station (1,2,3)",65
+319,28 St (1),66
+320,23 St (1),67
+321,18 St (1),68
+323,Christopher St-Sheridan Sq (1),69
+324,Houston St (1),70
+325,Canal St (1),71
+326,Franklin St (1),72
+327,"Chambers St (1,2,3)",73
+328,WTC Cortlandt (1),74
+329,Rector St (1),75
+333,"Wall St (2,3)",76
+392,"125 St (4,5,6)",77
+393,116 St (6),78
+394,110 St (6),79
+395,103 St (6),80
+396,96 St (6),81
+397,"86 St (4,5,6)",82
+398,77 St (6),83
+399,68 St-Hunter College (6),84
+403,33 St (6),85
+404,28 St (6),86
+405,23 St (6),87
+407,Astor Pl (6),88
+409,Spring St (6),89
+413,"Wall St (4,5)",90
+414,"Bowling Green (4,5)",91
+436,Harlem-148 St (3),92
+437,145 St (3),93
+438,"135 St (2,3)",94
+439,"125 St (2,3)",95
+440,"116 St (2,3)",96
+441,"Central Park North (110 St) (2,3)",97
+471,34 St-Hudson Yards (7),98
+475,96 St (Q),99
+476,86 St (Q),100
+477,72 St (Q),101
+601,"14 St (F,M,1,2,3)/6 Av (L)",102
+602,"14 St-Union Sq (L,N,Q,R,W,4,5,6)",103
+605,"168 St (A,C,1)",104
+607,"34 St-Herald Sq (B,D,F,M,N,Q,R,W)",105
+609,"Bryant Pk (B,D,F,M)/5 Av (7)",106
+610,"Grand Central-42 St (S,4,5,6,7)",107
+611,"Times Sq-42 St (N,Q,R,W,S,1,2,3,7)/42 St (A,C,E)",108
+612,"Lexington Av-53 St (E,M)/51 St (6)",109
+613,"Lexington Av (N,R,W)/59 St (4,5,6)",110
+614,"59 St-Columbus Circle (A,B,C,D,1)",111
+618,"14 St (A,C,E)/8 Av (L)",112
+619,"Broadway-Lafayette St (B,D,F,M)/Bleecker St (6)",113
+622,"Brooklyn Bridge-City Hall (4,5,6)/Chambers St (J,Z)",114
+623,"Canal St (J,N,Q,R,W,Z,6)",115
+624,"Chambers St (A,C)/WTC (E)/Park Pl (2,3)/Cortlandt (R,W)",116
+625,"Delancey St (F)/Essex St (J,M,Z)",117
+628,"Fulton St (A,C,J,Z,2,3,4,5)",118
+635,"South Ferry (1)/Whitehall St (R,W)",119
+8,"5 Av/59 St (N,R,W)",120
+9,"57 St-7 Av (N,Q,R,W)",121
+TRAM1,RI Tramway (Manhattan),122
+TRAM2,RI Tramway (Roosevelt),123
