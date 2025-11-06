@@ -723,9 +723,7 @@ hourly_pct_change = log( (total_ridership + 1) / (baseline_sh + 1) )
   readr::write_csv(date_lookup,            file.path(out_dir, &quot;date_lookup.csv&quot;))
   readr::write_csv(hour_lookup,            file.path(out_dir, &quot;hour_lookup.csv&quot;))
   readr::write_csv(station_summ,           file.path(out_dir, &quot;station_summary.csv&quot;))
-}
-
-df &lt;- read_parquet(&quot;data/derived/panel_station_day_indexed.parquet&quot;)</code></pre>
+}</code></pre>
 </div>
 
 
