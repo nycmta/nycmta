@@ -33,6 +33,7 @@ library(sf)
 library(glue)
 library(janitor)
 library(vroom)
+library(timeDate)
 })
 
 ```
@@ -323,6 +324,29 @@ panel_station_day <- panel_station_day %>%
   mutate(event_day = if_else(is.na(event_day), 0L, event_day))
 
 
+
+```
+
+## Addition of Holidays
+
+```{r}
+# Generate US federal holidays for 2024-2025
+holidays = 
+  tibble(
+    date = as.Date(holidayNYSE(2024:2025)),
+    is_holiday = "Yes"
+  )
+
+# Join with dataset
+panel_station_day = 
+  left_join(panel_station_day, holidays, by = "date") |>
+  mutate(
+    is_holiday = case_match(
+      is_holiday,
+      NA  ~ "No",
+      "Yes" ~ "Yes"
+    )
+  )
 
 ```
 
