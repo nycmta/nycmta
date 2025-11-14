@@ -9,6 +9,8 @@ navbar:
       href: data.html
     - text: "Data Wrangling"
       href: datawrangling.html
+    - text: "EDA"
+      href: eda.html
 output:
   html_document:
     theme: cosmo
