@@ -140,7 +140,12 @@ We often assume a linear relationship between weather and behavior, but human co
 The plot below shows the predicted ridership based on temperature, holding other factors constant (dry day, Tuesday in May).
 
 \[
-\text{Ridership} \sim s(\text{Temperature}) + s(\text{Precipitation}) + s(\text{Snowfall}) + \text{Day of Week} + \text{Month}
+\begin{aligned}
+\text{Ridership} \sim & \; s(\text{Temperature}) \\ 
+& + s(\text{Precipitation}) \\
+& + s(\text{Snowfall}) \\ 
+& + \text{Day of Week} + \text{Month}
+\end{aligned}
 \]
 
 ```{r story1_gam}

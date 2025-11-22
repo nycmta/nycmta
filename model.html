@@ -442,8 +442,12 @@ non-linear relationships and controls for other factors.</p>
 <p>The plot below shows the predicted ridership based on temperature,
 holding other factors constant (dry day, Tuesday in May).</p>
 <p><span class="math display">\[
-\text{Ridership} \sim s(\text{Temperature}) + s(\text{Precipitation}) +
-s(\text{Snowfall}) + \text{Day of Week} + \text{Month}
+\begin{aligned}
+\text{Ridership} \sim &amp; \; s(\text{Temperature}) \\
+&amp; + s(\text{Precipitation}) \\
+&amp; + s(\text{Snowfall}) \\
+&amp; + \text{Day of Week} + \text{Month}
+\end{aligned}
 \]</span></p>
 <pre class="r"><code># Aggregating to System Level
 system_daily &lt;- station_day %&gt;%
