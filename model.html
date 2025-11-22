@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>The Four Stories of NYC Ridership</title>
+
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">NYC Subway & Weather</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="model.html">Analysis</a>
+</li>
+<li>
+  <a href="data.html">Data &amp; Methods</a>
+</li>
+<li>
+  <a href="report.html">Report</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">The Four Stories of NYC Ridership</h1>
+
+</div>
+
+
+<p>Instead of a single “grand model” that averages out the nuances of
+New York City, we present three focused analyses. Each “story” targets a
+specific question about how weather, events, and station identity shape
+the daily rhythm of the subway.</p>
+<div id="baseline-rhythms" class="section level2">
+<h2>Baseline Rhythms</h2>
+<p>Before diving into anomalies, we must understand the normal heartbeat
+of the city. Ridership follows a distinct weekly pattern, with sharp
+peaks on weekdays and a relaxed, single-hump profile on weekends.</p>
+<pre class="r"><code># Ridership over time
+p_riders_over_time &lt;- station_day_aug %&gt;%
+  distinct(date, day_ridership_system, dow, is_holiday) %&gt;%
+  filter(is_holiday == &quot;No&quot;) %&gt;%
+  ggplot(aes(x = date, y = day_ridership_system / 1e6, color = dow)) +
+  geom_point(size = 0.8, alpha = 0.6) +
+  geom_smooth(method = &quot;loess&quot;, span = 0.1, linewidth = 1, se = FALSE) +
+  scale_y_continuous(labels = comma) +
+  labs(x = NULL, y = &quot;System Ridership (Millions)&quot;, color = NULL) +
+  theme(legend.position = &quot;none&quot;)
+
+# Boxplot
+p_dow_riders &lt;- station_day_aug %&gt;%
+  distinct(date, day_ridership_system, dow, is_holiday) %&gt;%
+  filter(is_holiday == &quot;No&quot;) %&gt;%
+  ggplot(aes(x = dow, y = day_ridership_system / 1e6, fill = dow)) +
+  geom_boxplot(alpha = 0.8, outlier.size = 0.5) +
+  labs(x = NULL, y = NULL) +
+  theme(axis.text.y = element_blank(), legend.position = &quot;none&quot;)
+
+(p_riders_over_time + p_dow_riders) +
+  plot_layout(widths = c(3, 1)) +
+  plot_annotation(title = &quot;System Ridership: The Weekly Pulse&quot;)</code></pre>
+<p><img src="model_files/figure-html/baseline_plots-1.png" width="960" /></p>
+<hr />
+</div>
+<div id="story-1-the-goldilocks-zone" class="section level2">
+<h2>Story 1: The “Goldilocks” Zone</h2>
+<p><strong>Question:</strong> Is there a “perfect” temperature for
+subway ridership?</p>
+<p>New Yorkers are famously resilient, but even they have limits. We
+hypothesize that ridership peaks in a comfortable “Goldilocks zone” of
+mild temperatures—not too hot, not too cold. First, let’s examine the
+raw data to see weather effects before formal modeling.</p>
+<pre class="r"><code># Temperature
+p_temp &lt;- station_day_aug %&gt;%
+  filter(is_holiday == &quot;No&quot;) %&gt;%
+  distinct(date, tmax, dow, day_ridership_system) %&gt;%
+  ggplot(aes(x = tmax, y = day_ridership_system / 1e6)) +
+  geom_point(alpha = 0.3, size = 1) +
+  geom_smooth(method = &quot;loess&quot;, span = 1, color = &quot;#E67E22&quot;, se = FALSE) +
+  facet_grid(. ~ dow) +
+  labs(title = &quot;Ridership vs Max Temp&quot;, x = &quot;Temp (°F)&quot;, y = &quot;Ridership (M)&quot;)
+
+# Precip
+p_prcp &lt;- station_day_aug %&gt;%
+  filter(is_holiday == &quot;No&quot;, prcp &gt; 0, snow == 0) %&gt;%
+  distinct(date, prcp, pct_change_system) %&gt;%
+  ggplot(aes(x = prcp, y = pct_change_system)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = &quot;loess&quot;, color = &quot;#2C7BE5&quot;, se = FALSE) +
+  scale_x_log10() +
+  labs(title = &quot;Rain Impact&quot;, x = &quot;Rain (in, log)&quot;, y = &quot;Log % Change&quot;)
+
+# Snow
+p_snow &lt;- station_day_aug %&gt;%
+  filter(is_holiday == &quot;No&quot;, snow &gt; 0) %&gt;%
+  distinct(date, snow, pct_change_system) %&gt;%
+  ggplot(aes(x = snow, y = pct_change_system)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = &quot;loess&quot;, color = &quot;#0FB9B1&quot;, se = FALSE) +
+  scale_x_log10() +
+  labs(title = &quot;Snow Impact&quot;, x = &quot;Snow (in, log)&quot;, y = NULL)
+
+p_temp / (p_prcp + p_snow)</code></pre>
+<p><img src="model_files/figure-html/weather_scatter-1.png" width="960" /></p>
+<p>We often assume a linear relationship between weather and behavior,
+but human comfort is non-linear. We can explore this with a
+<strong>Generalized Additive Model (GAM)</strong>, which allows for
+non-linear relationships and controls for other factors.</p>
+<p>The plot below shows the predicted ridership based on temperature,
+holding other factors constant (dry day, Tuesday in May).</p>
+<p><span class="math display">\[
+\text{Ridership} \sim s(\text{Temperature}) + s(\text{Precipitation}) +
+s(\text{Snowfall}) + \text{Day of Week} + \text{Month}
+\]</span></p>
+<pre class="r"><code># Aggregating to System Level
+system_daily &lt;- station_day %&gt;%
+  group_by(date) %&gt;%
+  summarize(
+    total_ridership = sum(entries_day, na.rm = TRUE),
+    tmax = first(tmax),
+    prcp = first(prcp),
+    snow = first(snow),
+    dow = first(dow),
+    month = first(month),
+    is_holiday = first(is_holiday),
+    .groups = &quot;drop&quot;
+  ) %&gt;%
+  filter(total_ridership &gt; 100000) # Remove potential bad data days
+
+# Calculate average ridership for each day of week
+dow_avg &lt;- system_daily %&gt;%
+  filter(is_holiday == &quot;No&quot;) %&gt;%
+  group_by(dow) %&gt;%
+  summarize(avg_ridership = mean(total_ridership), .groups = &quot;drop&quot;)
+
+# Normalize ridership by day of week average
+system_daily &lt;- system_daily %&gt;%
+  left_join(dow_avg, by = &quot;dow&quot;) %&gt;%
+  mutate(normalized_ridership = total_ridership / avg_ridership)
+
+# Fit GAM on normalized ridership with temperature and precipitation interaction
+gam_model &lt;- gam(normalized_ridership ~ te(tmax, prcp, k = c(8, 5)),
+  data = system_daily %&gt;% filter(is_holiday == &quot;No&quot;)
+)
+
+# Create prediction grid
+temp_range &lt;- seq(20, 95, length.out = 50)
+prcp_range &lt;- seq(0, 2, length.out = 50)
+
+pred_grid &lt;- expand.grid(
+  tmax = temp_range,
+  prcp = prcp_range
+)
+
+# Predict normalized ridership
+pred_grid$predicted &lt;- predict(gam_model, newdata = pred_grid)
+
+# Calculate percent change from average (1.0 for normalized ridership)
+# Average normalized ridership = 1.0 by definition
+pred_grid$pct_change &lt;- (pred_grid$predicted - 1) / 1 * 100
+
+# Find the optimal temperature for subtitle
+dry_preds &lt;- pred_grid %&gt;% filter(prcp == 0)
+optimal_idx &lt;- which.max(dry_preds$predicted)
+optimal_temp &lt;- dry_preds$tmax[optimal_idx]
+
+# Heatmap showing combined effects
+ggplot(pred_grid, aes(x = tmax, y = prcp, fill = pct_change)) +
+  geom_tile() +
+  scale_fill_gradientn(
+    colors = c(&quot;#08306b&quot;, &quot;#2171b5&quot;, &quot;#6baed6&quot;, &quot;#c6dbef&quot;, &quot;white&quot;, &quot;#fcbba1&quot;, &quot;#fb6a4a&quot;, &quot;#cb181d&quot;),
+    values = scales::rescale(c(-35, -20, -12, -5, 0, 2, 5, 10)),
+    name = &quot;% Change\nfrom Average&quot;,
+    limits = c(-35, 10),
+    breaks = c(10, 0, -10, -20, -30)
+  ) +
+  scale_x_continuous(breaks = seq(20, 90, by = 10)) +
+  scale_y_continuous(breaks = seq(0, 2, by = 0.5)) +
+  geom_contour(aes(z = pct_change), color = &quot;gray40&quot;, alpha = 0.7, bins = 10) +
+  labs(
+    title = &quot;The Weather-Ridership Surface: Temperature × Precipitation&quot;,
+    subtitle = paste0(&quot;% change from average daily ridership (optimal at &quot;, round(optimal_temp), &quot;°F, dry day)&quot;),
+    x = &quot;Max Daily Temperature (°F)&quot;,
+    y = &quot;Precipitation (inches)&quot;
+  ) +
+  theme(
+    panel.grid = element_blank(),
+    legend.position = &quot;right&quot;
+  )</code></pre>
+<p><img src="model_files/figure-html/story1_gam-1.png" width="960" /></p>
+<p><strong>Finding:</strong> This heatmap reveals how temperature and
+precipitation <strong>jointly</strong> affect ridership relative to the
+average. The red “sweet spot” sits between <strong>60-75°F with little
+to no rain</strong>—confirming the Goldilocks hypothesis. Key
+patterns:</p>
+<ul>
+<li><strong>Optimal Zone (red, bottom center):</strong> Ridership peaks
+4-6% above average on mild, dry days around 67°F. This is when walking
+to stations is most comfortable.</li>
+<li><strong>Cold + Wet (upper left, deep blue):</strong> The worst
+conditions, with ridership dropping 20-35% below average as commuters
+avoid frigid, rainy walks to stations.</li>
+<li><strong>Hot days (bottom right):</strong> Even dry days above 85°F
+see ridership 3-5% below average as extreme heat discourages
+travel.</li>
+<li><strong>Rain effect (moving up):</strong> Each inch of precipitation
+causes roughly 5-10% ridership decline, regardless of temperature.</li>
+</ul>
+<p>The contour lines show that precipitation has a <strong>stronger
+marginal effect</strong> than temperature—a half-inch of rain causes
+more ridership loss than a 20°F temperature swing within the moderate
+range.</p>
+<hr />
+</div>
+<div id="story-2-the-blast-radius-of-mega-events"
+class="section level2">
+<h2>Story 2: The “Blast Radius” of Mega-Events</h2>
+<p><strong>Question:</strong> Do events like the NYC Marathon affect the
+whole city, or just the route?</p>
+<p>Major events transform New York’s geography for a day, but how far
+does the impact extend? We analyzed two iconic 2024 events: the
+<strong>NYC Marathon (Nov 3)</strong> and the <strong>Pride March (June
+30)</strong>. For each station, we compared event-day ridership against
+a baseline of typical Sundays (median of all non-holiday Sundays in
+surrounding months), then mapped the percent change geographically.</p>
+<pre class="r"><code>library(sf)
+
+# Load station locations
+stations &lt;- station_day %&gt;%
+  distinct(station_complex_id, station_complex) %&gt;%
+  left_join(read_csv(&quot;data/stations/mta_station_complexes.csv&quot;, show_col_types = FALSE) %&gt;%
+    select(station_complex_id, latitude, longitude),
+  by = &quot;station_complex_id&quot;
+  )
+
+# Define events
+events_list &lt;- list(
+  &quot;NYC Marathon&quot; = as.Date(&quot;2024-11-03&quot;),
+  &quot;Pride March&quot; = as.Date(&quot;2024-06-30&quot;)
+)
+
+# Function to calculate impact
+calc_event_impact &lt;- function(evt_date, name) {
+  # Use broader baseline: same day of week across multiple months for robustness
+  evt_month &lt;- month(evt_date)
+  nearby_months &lt;- c(evt_month - 1, evt_month, evt_month + 1)
+  nearby_months &lt;- ((nearby_months - 1) %% 12) + 1  # Handle year wrap
+
+  baseline_dates &lt;- station_day %&gt;%
+    filter(
+      year(date) == year(evt_date),
+      month(date) %in% nearby_months,
+      dow == wday(evt_date, label = TRUE),
+      is_holiday == &quot;No&quot;,
+      date != evt_date
+    ) %&gt;%
+    pull(date) %&gt;%
+    unique()
+
+  # Get baseline for each station (median across typical Sundays)
+  baseline &lt;- station_day %&gt;%
+    filter(date %in% baseline_dates) %&gt;%
+    group_by(station_complex_id) %&gt;%
+    summarize(baseline_entries = median(entries_day, na.rm = TRUE), .groups = &quot;drop&quot;)
+
+  # Get event day ridership
+  event_day_data &lt;- station_day %&gt;%
+    filter(date == evt_date) %&gt;%
+    select(station_complex_id, event_entries = entries_day)
+
+  # Merge and calc pct change
+  baseline %&gt;%
+    left_join(event_day_data, by = &quot;station_complex_id&quot;) %&gt;%
+    mutate(
+      pct_change = (event_entries - baseline_entries) / baseline_entries,
+      # Cap for visualization
+      pct_change_cap = pmin(pmax(pct_change, -0.5), 1.0),
+      event_name = name
+    )
+}
+# Generate data for both events
+marathon_impact &lt;- calc_event_impact(events_list[[&quot;NYC Marathon&quot;]], &quot;NYC Marathon (Nov 3)&quot;)
+pride_impact &lt;- calc_event_impact(events_list[[&quot;Pride March&quot;]], &quot;Pride March (June 30)&quot;)
+
+plot_data &lt;- bind_rows(marathon_impact, pride_impact) %&gt;%
+  left_join(stations, by = &quot;station_complex_id&quot;) %&gt;%
+  filter(!is.na(latitude))
+
+# Download NYC neighborhood tabulation areas for detailed boundaries
+# This provides much more detailed geography than borough outlines
+nta_url &lt;- &quot;https://data.cityofnewyork.us/api/geospatial/9nt8-h7nd?method=export&amp;format=GeoJSON&quot;
+nyc_nta &lt;- tryCatch({
+  st_read(nta_url, quiet = TRUE)
+}, error = function(e) {
+  # Fallback to borough boundaries
+  borough_url &lt;- &quot;https://data.cityofnewyork.us/api/geospatial/tqmj-j8zm?method=export&amp;format=GeoJSON&quot;
+  st_read(borough_url, quiet = TRUE)
+})
+
+# Filter to Manhattan neighborhoods
+if (&quot;borough&quot; %in% names(nyc_nta)) {
+  manhattan_sf &lt;- nyc_nta %&gt;% filter(borough == &quot;Manhattan&quot;)
+} else if (&quot;boro_name&quot; %in% names(nyc_nta)) {
+  manhattan_sf &lt;- nyc_nta %&gt;% filter(boro_name == &quot;Manhattan&quot;)
+} else {
+  manhattan_sf &lt;- nyc_nta
+}
+
+# Plot with detailed Manhattan neighborhoods
+ggplot() +
+  # Add Manhattan neighborhoods as background with subtle borders
+  geom_sf(data = manhattan_sf, fill = &quot;gray92&quot;, color = &quot;gray75&quot;, linewidth = 0.2) +
+  # Add station points
+  geom_point(
+    data = plot_data,
+    aes(x = longitude, y = latitude, color = pct_change_cap),
+    alpha = 0.85, size = 3
+  ) +
+  scale_color_gradient2(
+    low = &quot;#2E86AB&quot;, mid = &quot;white&quot;, high = &quot;#E63946&quot;, midpoint = 0,
+    limits = c(-0.5, 1.0),
+    labels = percent_format(), name = &quot;Ridership Change\nvs. Baseline&quot;
+  ) +
+  facet_wrap(~event_name) +
+  coord_sf(
+    crs = 4326,
+    xlim = c(-74.02, -73.91),
+    ylim = c(40.70, 40.88)
+  ) +
+  labs(
+    title = &quot;The Blast Radius: Event Impact on Station Ridership&quot;,
+    subtitle = &quot;Red = increased ridership (+100%), White = normal, Blue = decreased (-50%)&quot;,
+    x = NULL, y = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    legend.position = &quot;bottom&quot;,
+    strip.text = element_text(face = &quot;bold&quot;, size = 12)
+  )</code></pre>
+<p><img src="model_files/figure-html/story2_events-1.png" width="960" /></p>
+<p><strong>Finding:</strong> The “Blast Radius” is real and
+geographically distinct.</p>
+<ul>
+<li><strong>Marathon:</strong> Ridership surges at stations near the
+finish line (Columbus Circle, 59 St) and along the route through the
+Upper East Side and Harlem. Some stations along closed streets show
+<em>decreases</em> as access becomes difficult.</li>
+<li><strong>Pride:</strong> The impact is highly concentrated in the
+West Village and Chelsea, with ridership spiking &gt;50% at key stations
+like Christopher St-Sheridan Sq and 14 St. The effect is tightly
+localized—Midtown stations are largely unaffected.</li>
+</ul>
+<p>These patterns suggest that event planning could benefit from
+station-specific service adjustments rather than system-wide
+changes.</p>
+<hr />
+</div>
+<div id="story-3-station-personalities" class="section level2">
+<h2>Story 3: Station Personalities</h2>
+<p><strong>Question:</strong> Do all subway stations behave the same
+way?</p>
+<p>Not all subway stations serve the same purpose. Some are dominated by
+9-to-5 commuters, others by evening leisure travelers, and some by
+late-night revelers. We used <strong>K-means clustering</strong> on
+hourly ridership profiles to classify stations into distinct
+“personality types.”</p>
+<pre class="r"><code>library(sf)
+
+# Load station locations (need this here for map)
+stations &lt;- station_day %&gt;%
+  distinct(station_complex_id, station_complex) %&gt;%
+  left_join(read_csv(&quot;data/stations/mta_station_complexes.csv&quot;, show_col_types = FALSE) %&gt;%
+    select(station_complex_id, latitude, longitude),
+  by = &quot;station_complex_id&quot;
+  )
+
+# Load NYC neighborhoods for map background
+nta_url &lt;- &quot;https://data.cityofnewyork.us/api/geospatial/9nt8-h7nd?method=export&amp;format=GeoJSON&quot;
+nyc_nta &lt;- tryCatch({
+  st_read(nta_url, quiet = TRUE)
+}, error = function(e) {
+  borough_url &lt;- &quot;https://data.cityofnewyork.us/api/geospatial/tqmj-j8zm?method=export&amp;format=GeoJSON&quot;
+  st_read(borough_url, quiet = TRUE)
+})
+
+if (&quot;borough&quot; %in% names(nyc_nta)) {
+  manhattan_sf &lt;- nyc_nta %&gt;% filter(borough == &quot;Manhattan&quot;)
+} else if (&quot;boro_name&quot; %in% names(nyc_nta)) {
+  manhattan_sf &lt;- nyc_nta %&gt;% filter(boro_name == &quot;Manhattan&quot;)
+} else {
+  manhattan_sf &lt;- nyc_nta
+}
+
+# 1. Create Hourly Profiles (Normalize by total daily rides)
+hourly_profiles &lt;- station_hour %&gt;%
+  filter(hour &gt;= 5) %&gt;% # Focus on active hours
+  group_by(station_complex_id, hour) %&gt;%
+  summarize(avg_ridership = median(total_ridership, na.rm = TRUE), .groups = &quot;drop_last&quot;) %&gt;%
+  mutate(profile = avg_ridership / sum(avg_ridership)) %&gt;%
+  ungroup() %&gt;%
+  select(station_complex_id, hour, profile) %&gt;%
+  pivot_wider(names_from = hour, values_from = profile, values_fill = 0)
+
+# 2. K-Means Clustering
+set.seed(123)
+# Scale not needed as rows sum to 1 (compositional), but let&#39;s just use raw profile
+kmeans_res &lt;- kmeans(hourly_profiles %&gt;% select(-station_complex_id), centers = 2)
+
+station_clusters &lt;- hourly_profiles %&gt;%
+  select(station_complex_id) %&gt;%
+  mutate(cluster = factor(kmeans_res$cluster)) %&gt;%
+  left_join(stations %&gt;% select(station_complex_id, station_complex), by = &quot;station_complex_id&quot;)
+
+# Label clusters based on peak time (simple heuristic)
+# (We&#39;d inspect this manually in a real workflow, here we infer)
+# Let&#39;s visualize the centroids to label them
+centroids &lt;- kmeans_res$centers %&gt;%
+  as.data.frame() %&gt;%
+  mutate(cluster = factor(1:nrow(kmeans_res$centers))) %&gt;%
+  pivot_longer(cols = -cluster, names_to = &quot;hour&quot;, values_to = &quot;pct&quot;) %&gt;%
+  mutate(hour = as.numeric(hour))
+
+# Auto-label based on profile shape
+# &quot;Residential&quot; stations have strong morning peak (commuters leaving home)
+# &quot;Commercial&quot; stations have evening peak (workers leaving offices)
+cluster_labels &lt;- centroids %&gt;%
+  group_by(cluster) %&gt;%
+  summarize(
+    morning_peak = sum(pct[hour %in% 7:9]),
+    evening_peak = sum(pct[hour %in% 17:19]),
+    .groups = &quot;drop&quot;
+  ) %&gt;%
+  mutate(label = if_else(
+    morning_peak &gt; 0.15, &quot;Residential&quot;, &quot;Commercial&quot;
+  )) %&gt;%
+  select(cluster, label)
+
+station_clusters &lt;- station_clusters %&gt;%
+  left_join(cluster_labels, by = &quot;cluster&quot;)
+
+# 3. Rain Sensitivity Analysis - Hourly basis (for Story 4)
+# Get precipitation data from station_day
+daily_prcp &lt;- station_day %&gt;%
+  select(station_complex_id, date, prcp) %&gt;%
+  distinct()
+
+# Calculate avg drop in ridership on rainy days (&gt;0.5 in) for each station by hour
+rain_effect_hourly &lt;- station_hour %&gt;%
+  filter(hour &gt;= 5) %&gt;%
+  left_join(daily_prcp, by = c(&quot;station_complex_id&quot;, &quot;date&quot;)) %&gt;%
+  mutate(is_rainy = if_else(prcp &gt;= 0.5, &quot;Rain&quot;, &quot;Dry&quot;)) %&gt;%
+  group_by(station_complex_id, hour, is_rainy) %&gt;%
+  summarize(avg_ridership = median(total_ridership, na.rm = TRUE), .groups = &quot;drop&quot;) %&gt;%
+  pivot_wider(names_from = is_rainy, values_from = avg_ridership) %&gt;%
+  filter(!is.na(Rain) &amp; !is.na(Dry)) %&gt;%
+  mutate(rain_change_pct = (Rain - Dry) / Dry)
+
+# Aggregate by hour (all stations combined)
+rain_by_hour &lt;- rain_effect_hourly %&gt;%
+  group_by(hour) %&gt;%
+  summarize(
+    median_change = median(rain_change_pct, na.rm = TRUE),
+    .groups = &quot;drop&quot;
+  )
+
+# Count stations by type
+station_counts &lt;- station_clusters %&gt;%
+  count(label) %&gt;%
+  filter(!is.na(label))
+
+# Plot profiles
+p_profiles &lt;- ggplot(centroids %&gt;% left_join(cluster_labels, by = &quot;cluster&quot;) %&gt;% arrange(label, hour),
+  aes(x = hour, y = pct, color = label, group = label)
+) +
+  geom_line(linewidth = 1.2) +
+  scale_color_manual(
+    values = c(&quot;Residential&quot; = &quot;#E63946&quot;, &quot;Commercial&quot; = &quot;#2E86AB&quot;)
+  ) +
+  labs(title = &quot;Station Personality Profiles&quot;, x = &quot;Hour of Day&quot;, y = &quot;% of Daily Rides&quot;, color = &quot;Station Type&quot;)
+
+p_rain &lt;- ggplot(rain_by_hour, aes(x = hour, y = median_change)) +
+  geom_line(linewidth = 1.2, color = &quot;#2E86AB&quot;) +
+  geom_hline(yintercept = 0, linetype = &quot;dashed&quot;, color = &quot;gray50&quot;) +
+  scale_y_continuous(labels = percent_format()) +
+  labs(
+    title = &quot;Rain Sensitivity by Hour&quot;,
+    subtitle = &quot;Negative values = fewer riders on rainy days&quot;,
+    x = &quot;Hour of Day&quot;, y = &quot;% Change on Rainy Days&quot;
+  )
+
+p_profiles</code></pre>
+<p><img src="model_files/figure-html/story3_clustering-1.png" width="960" /></p>
+<p><strong>Finding:</strong> K-means clustering reveals two clear
+station archetypes based on <strong>commute flow direction</strong>:</p>
+<ul>
+<li><p><strong>Residential (43 stations):</strong> Sharp morning peak
+around 8 AM as commuters leave their neighborhoods to head to work.
+These are origin stations where people begin their daily
+commute.</p></li>
+<li><p><strong>Commercial (112 stations):</strong> Gradual buildup
+throughout the day with a pronounced evening peak (5-7 PM) as workers
+leave offices and head home. The activity stays elevated later into the
+evening as people also leave restaurants, theaters, and shops.</p></li>
+</ul>
+<pre class="r"><code># Map of station types
+station_map_data &lt;- station_clusters %&gt;%
+  left_join(stations, by = c(&quot;station_complex_id&quot;, &quot;station_complex&quot;)) %&gt;%
+  filter(!is.na(latitude) &amp; !is.na(label))
+
+p_map &lt;- ggplot() +
+  geom_sf(data = manhattan_sf, fill = &quot;gray92&quot;, color = &quot;gray75&quot;, linewidth = 0.2) +
+  geom_point(
+    data = station_map_data,
+    aes(x = longitude, y = latitude, color = label),
+    alpha = 0.8, size = 2.5
+  ) +
+  scale_color_manual(
+    values = c(&quot;Residential&quot; = &quot;#E63946&quot;, &quot;Commercial&quot; = &quot;#2E86AB&quot;),
+    name = &quot;Station Type&quot;
+  ) +
+  coord_sf(
+    crs = 4326,
+    xlim = c(-74.02, -73.91),
+    ylim = c(40.70, 40.88)
+  ) +
+  labs(
+    title = &quot;Geographic Distribution of Station Types&quot;,
+    subtitle = paste0(
+      &quot;Workplace: &quot;, station_counts$n[station_counts$label == &quot;Workplace&quot;], &quot; stations | &quot;,
+      &quot;Leisure/Commercial: &quot;, station_counts$n[station_counts$label == &quot;Leisure/Commercial&quot;], &quot; stations&quot;
+    ),
+    x = NULL, y = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    legend.position = &quot;bottom&quot;
+  )
+
+p_map</code></pre>
+<p><img src="model_files/figure-html/story3_map-1.png" width="960" /></p>
+<p><strong>Geographic Distribution:</strong> The map confirms our
+interpretation of commute flow. Commercial stations (blue) dominate
+Midtown and Lower Manhattan—Grand Central, Bryant Park, Rockefeller
+Center, and the Financial District—where workers <strong>exit</strong>
+the subway in the evening to head home. Residential stations (red) are
+concentrated in the Upper West Side, Upper East Side, and other
+neighborhood areas where commuters <strong>enter</strong> the subway
+each morning.</p>
+<p>The few red spots in Midtown are notable exceptions that prove the
+rule: <strong>Penn Station</strong> and <strong>Times Square</strong>
+show morning-peak patterns not because they’re residential, but because
+they’re major <strong>transit hubs</strong>—commuters from New Jersey
+and Long Island arrive here in the morning to transfer to other lines or
+walk to nearby offices. <strong>Roosevelt Island</strong> is an actual
+residential neighborhood. These stations function as “entry points” into
+Manhattan, behaving like residential stations despite their Midtown
+location.</p>
+<hr />
+</div>
+<div id="story-4-rain-sensitivity-by-hour" class="section level2">
+<h2>Story 4: Rain Sensitivity by Hour</h2>
+<p><strong>Question:</strong> When does rain hurt ridership the
+most?</p>
+<p>Beyond station types, we can examine how rain sensitivity varies
+throughout the day. This analysis reveals important patterns about when
+commuters are most likely to change their behavior in response to
+weather.</p>
+<pre class="r"><code>p_rain</code></pre>
+<p><img src="model_files/figure-html/story4_rain_hour-1.png" width="960" /></p>
+<p><strong>Finding:</strong> The rain sensitivity by hour plot shows
+that subway ridership drops most sharply during the <strong>morning
+commute hours (7-9 AM)</strong>, with declines of 20-30%. This is likely
+because morning commuters face strict arrival deadlines—they must get to
+work on time, so if it’s raining they switch to alternatives like taxis,
+rideshares, or working from home. In contrast, afternoon and evening
+ridership shows smaller drops (5-18%) because travelers have more
+flexibility to simply <strong>wait for the rain to stop</strong> before
+taking the subway.</p>
+<p>These insights suggest that the MTA should anticipate <strong>reduced
+morning rush demand on rainy days</strong> and consider adjusting
+service accordingly, while afternoon and evening service can remain
+relatively stable.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

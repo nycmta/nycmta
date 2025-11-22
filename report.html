@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="William M. Donovan (wd2328), Hantang Qin (hq2229), Yongyan Liu (yl6107), Yijun Wang (yw4664), Heng Hu (hh2648)" />
+
+<meta name="date" content="2025-11-22" />
+
+<title>Project Report</title>
+
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">NYC Subway & Weather</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="model.html">Analysis</a>
+</li>
+<li>
+  <a href="data.html">Data &amp; Methods</a>
+</li>
+<li>
+  <a href="report.html">Report</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Project Report</h1>
+<h4 class="author">William M. Donovan (wd2328), Hantang Qin (hq2229),
+Yongyan Liu (yl6107), Yijun Wang (yw4664), Heng Hu (hh2648)</h4>
+<h4 class="date">November 22, 2025</h4>
+
+</div>
+
+
+<div id="motivation" class="section level2">
+<h2>Motivation</h2>
+<p>New York City runs on the subway. For millions of residents, it is
+the primary lifeline to work, education, and leisure. However, this
+lifeline is exposed to the elements. As climate change increases the
+frequency of extreme weather events—from blistering heat waves to flash
+floods—understanding the resilience of our transit system is
+critical.</p>
+<p>Simultaneously, the city is a stage for global events. The NYC
+Marathon, Pride March, and other cultural phenomena transform the city’s
+geography for a day. Understanding how these events pulse through the
+transit network helps in planning and crowd management.</p>
+<p><strong>Our goal:</strong> To quantify the “pulse” of the city by
+analyzing how <strong>weather extremes</strong> and
+<strong>mega-events</strong> distort the normal rhythms of subway
+ridership.</p>
+</div>
+<div id="related-work" class="section level2">
+<h2>Related Work</h2>
+<p>Our work builds on a rich tradition of urban analytics. Previous
+studies have looked at: * <strong>Weather &amp; Transit:</strong>
+Studies in cities like Chicago and London have established that rain
+reduces discretionary travel, while extreme cold has a non-linear
+“chilling” effect on ridership. * <strong>Event Impact:</strong>
+Transport agencies often use “special event schedules,” but granular,
+station-level impact analysis is often proprietary or retrospective. *
+<strong>P8105 Precedents:</strong> We drew inspiration from past
+projects like <em>Bikes in NYC</em> (Fall 2020), which successfully used
+spatial visualization to tell a story about transport usage.</p>
+</div>
+<div id="initial-questions" class="section level2">
+<h2>Initial Questions</h2>
+<p>We started with broad questions that evolved into specific “data
+stories”:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Original Question:</strong> How does weather affect
+ridership?
+<ul>
+<li><em>Evolved into:</em> Is there a “Goldilocks” temperature zone
+where ridership is maximized? How much does ridership drop during
+freezing cold vs. extreme heat?</li>
+</ul></li>
+<li><strong>Original Question:</strong> Do events increase ridership?
+<ul>
+<li><em>Evolved into:</em> What is the “Blast Radius” of a mega-event?
+Do effects ripple across the borough, or are they hyper-localized?</li>
+</ul></li>
+<li><strong>Original Question:</strong> Are all stations affected
+equally?
+<ul>
+<li><em>Evolved into:</em> Can we cluster stations by their
+“personality” (Commuter vs. Tourist) and determine which types are most
+“fair-weather” friends?</li>
+</ul></li>
+</ol>
+</div>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>We synthesized data from four disparate sources to build a
+comprehensive <strong>Station-Hour</strong> and
+<strong>Station-Day</strong> panel for 2024-2025.</p>
+<ul>
+<li><strong>MTA Subway Hourly Ridership:</strong> The backbone of our
+analysis. We processed over <strong>1.9 million</strong> hourly records
+for 123 Manhattan stations.
+<ul>
+<li><em>Challenge:</em> The raw data is massive (disaggregated by fare
+type).</li>
+<li><em>Solution:</em> We used Socrata API’s SoQL query language to
+perform server-side aggregation (<code>SUM(ridership)</code>) before
+downloading, reducing data volume by 96%.</li>
+</ul></li>
+<li><strong>NOAA Weather Data (Central Park):</strong> Daily temperature
+(<code>TMAX</code>), precipitation (<code>PRCP</code>), and snowfall
+(<code>SNOW</code>) from the Global Historical Climatology Network
+(GHCN).</li>
+<li><strong>NYC Permitted Events:</strong> A database of 150,000+
+permits. We filtered for “Major” events (parades, street closures) to
+isolate true disruptors.</li>
+<li><strong>Geospatial Data:</strong> Station coordinates allowed us to
+map the “Blast Radius” of events and visualize spatial patterns.</li>
+</ul>
+</div>
+<div id="exploratory-analysis" class="section level2">
+<h2>Exploratory Analysis</h2>
+<p>Our initial exploration revealed strong temporal patterns. *
+<strong>Weekly Rhythm:</strong> The classic “two-humped” camel shape of
+AM/PM peaks on weekdays contrasts sharply with the broad, single midday
+peak of weekends. * <strong>Seasonality:</strong> Ridership shows a dip
+in deep winter (Jan/Feb) and stability through the summer, debunking the
+idea that New Yorkers abandon the subway in July.</p>
+</div>
+<div id="additional-analysis-the-three-stories" class="section level2">
+<h2>Additional Analysis (The Three Stories)</h2>
+<p>We moved beyond simple correlations to three targeted analyses
+(detailed on the <a href="model.html">Analysis</a> page).</p>
+<div id="story-1-the-goldilocks-curve" class="section level3">
+<h3>Story 1: The Goldilocks Curve</h3>
+<p>Using a <strong>Generalized Additive Model (GAM)</strong>, we found
+that the relationship between temperature and ridership is
+<strong>non-linear</strong>. * <strong>The “Comfort Zone”:</strong>
+Ridership peaks between <strong>60°F and 75°F</strong>. * <strong>The
+“Cold Snap”:</strong> Ridership drops significantly as temperatures
+approach freezing (32°F). * <strong>The “Heat Resilience”:</strong>
+Surprisingly, heat waves (&gt;90°F) show a much smaller dip than cold
+snaps. New Yorkers will sweat, but they won’t freeze.</p>
+</div>
+<div id="story-2-the-blast-radius" class="section level3">
+<h3>Story 2: The Blast Radius</h3>
+<p>We mapped the station-level percent change in ridership during the
+<strong>NYC Marathon</strong> and <strong>Pride March</strong>. *
+<strong>Marathon:</strong> Created a linear “corridor of activity” along
+the Upper West Side and 1st Avenue. * <strong>Pride:</strong> Showed an
+intense, concentrated “hotspot” in the West Village, with some stations
+seeing surges of &gt;50% above baseline. * This confirms that “Citywide”
+events are often geographically specific phenomena.</p>
+</div>
+<div id="story-3-commuters-vs.-tourists" class="section level3">
+<h3>Story 3: Commuters vs. Tourists</h3>
+<p>We used <strong>K-Means Clustering</strong> on hourly ridership
+profiles to classify stations. * <strong>Cluster 1 (Commuters):</strong>
+Sharp peaks at 8 AM and 6 PM. * <strong>Cluster 2
+(Evening/Mixed):</strong> Broader peaks, active late at night. *
+<strong>Result:</strong> “Commuter” stations are <strong>more
+resilient</strong> to rain. “Evening/Mixed” stations see larger drops on
+rainy days, suggesting that leisure trips are the first to be cancelled
+when it pours.</p>
+</div>
+</div>
+<div id="discussion" class="section level2">
+<h2>Discussion</h2>
+<p>Our findings paint a picture of a transit system that is deeply
+intertwined with the physical and social environment of the city.</p>
+<ul>
+<li><strong>Resilience:</strong> The system is remarkably resilient to
+heat but vulnerable to cold.</li>
+<li><strong>Inequality of Impact:</strong> Rain doesn’t treat all
+stations equally. The “Fair Weather Rider” is likely a leisure rider,
+while the commuter pushes through the storm.</li>
+<li><strong>Event Planning:</strong> The “Blast Radius” maps could help
+the MTA target service increases more precisely—sending extra trains not
+just “to Manhattan” but specifically to the 1/2/3 lines during the
+Marathon or the A/C/E during Pride.</li>
+</ul>
+<p><strong>Limitations:</strong> * <strong>Manhattan Focus:</strong> We
+limited our scope to Manhattan. The outer boroughs likely show different
+“Commuter” dynamics. * <strong>Events Data:</strong> “Permitted Events”
+is a noisy dataset. We had to manually curate major events to filter out
+block parties.</p>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<ol style="list-style-type: decimal">
+<li>MTA Open Data. <em>Subway Hourly Ridership</em>.</li>
+<li>NOAA National Centers for Environmental Information. <em>GHCN-Daily
+(Central Park)</em>.</li>
+<li>NYC Open Data. <em>NYC Permitted Event Information</em>.</li>
+<li>P8105 Course Materials &amp; Past Projects.</li>
+</ol>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

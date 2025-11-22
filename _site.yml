@@ -5,12 +5,12 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Data"
+    - text: "Analysis"
+      href: model.html
+    - text: "Data & Methods"
       href: data.html
-    - text: "Data Wrangling"
-      href: datawrangling.html
-    - text: "EDA"
-      href: eda.html
+    - text: "Report"
+      href: report.html
 output:
   html_document:
     theme: cosmo

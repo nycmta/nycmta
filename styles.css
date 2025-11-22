@@ -1,84 +1,229 @@
-/* Custom styles for NYC MTA project website */
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
 
-/* Title styling */
-h1.title {
-  color: #2C7BE5;
-  font-weight: bold;
-  margin-bottom: 20px;
+/* --- Global Variables & Reset --- */
+:root {
+  --bg-color: #fcfcfc;
+  --text-color: #1a1a1a;
+  --primary-color: #0039A6; /* MTA Blue */
+  --accent-color: #EE352E;  /* MTA Red */
+  --subtle-gray: #f0f0f0;
+  --border-color: #e0e0e0;
 }
 
-/* Author and date styling */
-h4.author, h4.date {
-  color: #444444;
-  font-weight: 600;
+body {
+  background-color: var(--bg-color);
+  font-family: 'Lora', serif; /* Editorial feel for body text */
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text-color);
+  margin-top: 80px; /* Space for fixed navbar */
 }
 
-/* Heading colors */
-h1, h2, h3 {
-  color: #0FB9B1;
-  margin-top: 30px;
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif; /* Modern sans for headers */
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #000;
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+}
+
+h1 {
+  font-size: 3rem;
+  border-bottom: 4px solid #000;
+  padding-bottom: 15px;
+  margin-bottom: 40px;
 }
 
 h2 {
-  border-bottom: 2px solid #0FB9B1;
-  padding-bottom: 5px;
+  font-size: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
 }
 
-/* Link styling */
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #444;
+}
+
+/* --- Navigation Bar --- */
+.navbar-cosmo {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-bottom: 1px solid #eaeaea;
+  font-family: 'Inter', sans-serif;
+  padding: 15px 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-default .navbar-brand {
+  color: #FFFFFF !important; /* White text for brand for better contrast */
+  font-weight: 900;
+  font-size: 1.4rem;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #FFFFFF !important; /* White text for navigation bar */
+  font-weight: 500;
+  font-size: 1.2rem !important; /* Slightly smaller, closer to brand size */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: var(--primary-color) !important;
+}
+
+/* --- Links --- */
 a {
-  color: #E67E22;
+  color: var(--primary-color);
   text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
 }
 
 a:hover {
-  color: #CF711F;
-  text-decoration: underline;
+  color: #002a7a;
+  text-decoration: none;
+  border-bottom: 1px solid var(--primary-color);
 }
 
-/* Code blocks */
+/* --- Code Blocks --- */
 pre {
-  background-color: #f8f9fa;
-  border-left: 3px solid #2C7BE5;
-  padding: 10px;
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 15px;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.9rem;
+  color: #f0f0f0;
+  overflow-x: auto; /* Ensure horizontal scroll for long lines */
 }
 
-/* Tables */
-table {
-  margin: 20px auto;
-  border-collapse: collapse;
+pre code {
+  color: inherit; /* Inherit color from parent pre */
+  background-color: transparent; /* No separate background for nested code */
+  padding: 0; /* Remove padding from nested code */
+  border-radius: 0; /* Remove border-radius from nested code */
 }
 
-table th {
-  background-color: #2C7BE5;
-  color: white;
-  padding: 10px;
+code {
+  color: #d63384; /* Pinkish accent for *inline* code */
+  background-color: #f8f8f8;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: 'Source Code Pro', monospace;
 }
 
-table td {
-  padding: 8px;
-  border: 1px solid #dee2e6;
-}
-
-/* Blockquotes */
-blockquote {
-  border-left: 4px solid #0FB9B1;
-  padding-left: 15px;
-  color: #666;
-  font-style: italic;
-}
-
-/* TOC styling */
-.tocify {
-  border: 1px solid #dee2e6;
-  border-radius: 5px;
-}
-
-.tocify-header {
-  font-weight: 600;
-}
-
-/* Responsive images */
+/* --- Images & Figures --- */
 img {
   max-width: 100%;
   height: auto;
+  border-radius: 4px;
+  margin: 20px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.main-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- Buttons (if any) --- */
+.btn-primary {
+  background-color: #000;
+  border-color: #000;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 20px;
+  border-radius: 0;
+}
+
+.btn-primary:hover {
+  background-color: #333;
+  border-color: #333;
+}
+
+/* --- Table of Contents (Floating) --- */
+.tocify {
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+/* Target the list items within the TOC */
+.tocify ul, .tocify li {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* The links themselves - unify size */
+.list-group-item {
+  border: none !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 18px !important; /* Unified with body text size */
+  color: #666 !important;
+  padding: 10px 15px !important;
+  background-color: transparent !important;
+  transition: all 0.2s ease;
+  border-left: 2px solid #eee !important; /* Default border */
+  line-height: 1.4 !important;
+}
+
+/* Prevent nested items from shrinking excessively */
+.tocify-subheader .list-group-item {
+  font-size: 16px !important; /* Slightly smaller for hierarchy */
+  padding-left: 25px !important;
+}
+
+/* Hover state */
+.list-group-item:hover {
+  color: var(--primary-color) !important;
+  background-color: transparent !important;
+  text-decoration: none;
+  border-left: 2px solid var(--primary-color) !important;
+}
+
+/* Active state */
+.list-group-item.active, 
+.list-group-item.active:hover, 
+.list-group-item.active:focus {
+  color: #000 !important;
+  background-color: transparent !important;
+  font-weight: 700 !important;
+  border-left: 3px solid #000 !important; /* distinct active border */
+  padding-left: 14px !important; /* slight offset correction */
+  text-shadow: none !important;
+}
+
+/* Main container spacing to prevent TOC overlap */
+.main-container {
+  max-width: 1200px !important; /* Wider container for modern look */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Adjust TOC position if needed */
+#toc-col {
+  margin-top: 20px;
+}
+
+/* --- Footer --- */
+.footer {
+  margin-top: 60px;
+  padding: 40px 0;
+  border-top: 1px solid #eee;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  color: #888;
+  font-size: 0.9rem;
 }
