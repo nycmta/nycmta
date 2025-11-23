@@ -53,14 +53,46 @@ We synthesized data from four disparate sources to build a comprehensive **Stati
 *   **NYC Permitted Events:** A database of 150,000+ permits. We filtered for "Major" events (parades, street closures) to isolate true disruptors.
 *   **Geospatial Data:** Station coordinates allowed us to map the "Blast Radius" of events and visualize spatial patterns.
 
-## Analysis
+### Data Wrangling
 
-Our initial exploration revealed strong temporal patterns.
+We constructed two analysis-ready panels through the following pipeline:
 
-*   **Weekly Rhythm:** The classic "two-humped" camel shape of AM/PM peaks on weekdays contrasts sharply with the broad, single midday peak of weekends.
-*   **Seasonality:** Ridership shows a dip in deep winter (Jan/Feb) and stability through the summer, debunking the idea that New Yorkers abandon the subway in July.
+*   **Panel Construction:** Built station-hour (most granular) and station-day (aggregated) datasets by joining ridership with weather and event data.
+*   **Weather Features:** Engineered binary indicators for `heatwave` (≥90°F for 3+ consecutive days) and `storm` (≥1 inch precipitation).
+*   **Event Matching:** Geocoded event addresses to coordinates, then spatially joined to nearest stations within 800m radius.
+*   **Baseline Calculation:** Defined each station's baseline as median ridership by day-of-week and month to calculate percent change from expected values.
 
-We moved beyond simple correlations to four targeted analyses (detailed on the [Analysis](model.html) page).
+Full pipeline details are on the [Data & Methods](data.html) page.
+
+## Exploratory Analysis
+
+Our initial exploration revealed strong temporal and spatial patterns across our four datasets. Detailed visualizations are available on the [Data & Methods](data.html) page.
+
+### Ridership Patterns
+
+*   **Daily Time Series:** Manhattan daily ridership in 2024 shows relatively stable patterns with dips around major holidays and occasional fluctuations.
+*   **Hourly Profiles:** The classic "two-humped camel" shape of AM/PM peaks on weekdays contrasts sharply with the broad, single midday peak of weekends—revealing fundamentally different travel behaviors.
+*   **Station Rankings:** The top 30 stations by total ridership reveal major transit hubs (Times Square, Penn Station, Grand Central) dominating system usage, with clear geographic clustering in Midtown.
+
+### Weather Patterns
+
+*   **Temperature and Precipitation:** Time series plots show typical seasonal variation with summer heat waves and winter cold snaps, plus precipitation events throughout the year.
+*   **Seasonal Summary:** We identified multiple heat days (≥90°F) concentrated in summer and storm events (≥1 inch precipitation) distributed throughout the study period.
+
+### Event Patterns
+
+*   **Temporal Distribution:** Large permitted events show strong seasonality—summer and fall peaks with winter lows—reflecting NYC's outdoor event calendar.
+*   **Event Types:** Block parties, street fairs, and athletic events dominate Manhattan's large event landscape.
+
+### Spatial Distribution
+
+*   **Station Map:** Mapping total ridership by station reveals the concentration of activity in Midtown and the Financial District, with ridership intensity decreasing toward the Upper Manhattan neighborhoods.
+
+---
+
+## Statistical Analyses
+
+Building on the exploratory patterns above, we developed four targeted statistical analyses to quantify weather and event impacts on ridership (detailed on the [Analysis](model.html) page).
 
 ### Story 1: The Goldilocks Zone
 Using a **Generalized Additive Model (GAM)**, we found that the relationship between weather and ridership is **non-linear**, with temperature and precipitation interacting to shape commuter behavior.

@@ -451,20 +451,86 @@ isolate true disruptors.</li>
 <li><strong>Geospatial Data:</strong> Station coordinates allowed us to
 map the “Blast Radius” of events and visualize spatial patterns.</li>
 </ul>
-</div>
-<div id="analysis" class="section level2">
-<h2>Analysis</h2>
-<p>Our initial exploration revealed strong temporal patterns.</p>
+<div id="data-wrangling" class="section level3">
+<h3>Data Wrangling</h3>
+<p>We constructed two analysis-ready panels through the following
+pipeline:</p>
 <ul>
-<li><strong>Weekly Rhythm:</strong> The classic “two-humped” camel shape
-of AM/PM peaks on weekdays contrasts sharply with the broad, single
-midday peak of weekends.</li>
-<li><strong>Seasonality:</strong> Ridership shows a dip in deep winter
-(Jan/Feb) and stability through the summer, debunking the idea that New
-Yorkers abandon the subway in July.</li>
+<li><strong>Panel Construction:</strong> Built station-hour (most
+granular) and station-day (aggregated) datasets by joining ridership
+with weather and event data.</li>
+<li><strong>Weather Features:</strong> Engineered binary indicators for
+<code>heatwave</code> (≥90°F for 3+ consecutive days) and
+<code>storm</code> (≥1 inch precipitation).</li>
+<li><strong>Event Matching:</strong> Geocoded event addresses to
+coordinates, then spatially joined to nearest stations within 800m
+radius.</li>
+<li><strong>Baseline Calculation:</strong> Defined each station’s
+baseline as median ridership by day-of-week and month to calculate
+percent change from expected values.</li>
 </ul>
-<p>We moved beyond simple correlations to four targeted analyses
-(detailed on the <a href="model.html">Analysis</a> page).</p>
+<p>Full pipeline details are on the <a href="data.html">Data &amp;
+Methods</a> page.</p>
+</div>
+</div>
+<div id="exploratory-analysis" class="section level2">
+<h2>Exploratory Analysis</h2>
+<p>Our initial exploration revealed strong temporal and spatial patterns
+across our four datasets. Detailed visualizations are available on the
+<a href="data.html">Data &amp; Methods</a> page.</p>
+<div id="ridership-patterns" class="section level3">
+<h3>Ridership Patterns</h3>
+<ul>
+<li><strong>Daily Time Series:</strong> Manhattan daily ridership in
+2024 shows relatively stable patterns with dips around major holidays
+and occasional fluctuations.</li>
+<li><strong>Hourly Profiles:</strong> The classic “two-humped camel”
+shape of AM/PM peaks on weekdays contrasts sharply with the broad,
+single midday peak of weekends—revealing fundamentally different travel
+behaviors.</li>
+<li><strong>Station Rankings:</strong> The top 30 stations by total
+ridership reveal major transit hubs (Times Square, Penn Station, Grand
+Central) dominating system usage, with clear geographic clustering in
+Midtown.</li>
+</ul>
+</div>
+<div id="weather-patterns" class="section level3">
+<h3>Weather Patterns</h3>
+<ul>
+<li><strong>Temperature and Precipitation:</strong> Time series plots
+show typical seasonal variation with summer heat waves and winter cold
+snaps, plus precipitation events throughout the year.</li>
+<li><strong>Seasonal Summary:</strong> We identified multiple heat days
+(≥90°F) concentrated in summer and storm events (≥1 inch precipitation)
+distributed throughout the study period.</li>
+</ul>
+</div>
+<div id="event-patterns" class="section level3">
+<h3>Event Patterns</h3>
+<ul>
+<li><strong>Temporal Distribution:</strong> Large permitted events show
+strong seasonality—summer and fall peaks with winter lows—reflecting
+NYC’s outdoor event calendar.</li>
+<li><strong>Event Types:</strong> Block parties, street fairs, and
+athletic events dominate Manhattan’s large event landscape.</li>
+</ul>
+</div>
+<div id="spatial-distribution" class="section level3">
+<h3>Spatial Distribution</h3>
+<ul>
+<li><strong>Station Map:</strong> Mapping total ridership by station
+reveals the concentration of activity in Midtown and the Financial
+District, with ridership intensity decreasing toward the Upper Manhattan
+neighborhoods.</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="statistical-analyses" class="section level2">
+<h2>Statistical Analyses</h2>
+<p>Building on the exploratory patterns above, we developed four
+targeted statistical analyses to quantify weather and event impacts on
+ridership (detailed on the <a href="model.html">Analysis</a> page).</p>
 <div id="story-1-the-goldilocks-zone" class="section level3">
 <h3>Story 1: The Goldilocks Zone</h3>
 <p>Using a <strong>Generalized Additive Model (GAM)</strong>, we found
