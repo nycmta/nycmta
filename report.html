@@ -12,7 +12,7 @@
 <meta name="author" content="William M. Donovan (wd2328), Hantang Qin (hq2229), Yongyan Liu (yl6107), Yijun Wang (yw4664), Heng Hu (hh2648)" />
 
 
-<title>Project Report</title>
+<title>Project Report: The Pulse of NYC: Weather, Events, and the Subway</title>
 
 <script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -357,7 +357,8 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Project Report</h1>
+<h1 class="title toc-ignore">Project Report: The Pulse of NYC: Weather,
+Events, and the Subway</h1>
 <h4 class="author">William M. Donovan (wd2328), Hantang Qin (hq2229),
 Yongyan Liu (yl6107), Yijun Wang (yw4664), Heng Hu (hh2648)</h4>
 <h4 class="date">December 2025</h4>
@@ -365,8 +366,9 @@ Yongyan Liu (yl6107), Yijun Wang (yw4664), Heng Hu (hh2648)</h4>
 </div>
 
 
-<div id="motivation" class="section level2">
-<h2>Motivation</h2>
+<p><br></p>
+<div id="motivation" class="section level1">
+<h1>Motivation</h1>
 <p>New York City runs on the subway. For millions of residents, it is
 the primary lifeline to work, education, and leisure. However, this
 lifeline is exposed to the elements. As climate change increases the
@@ -381,26 +383,28 @@ transit network helps in planning and crowd management.</p>
 analyzing how <strong>weather extremes</strong> and
 <strong>mega-events</strong> distort the normal rhythms of subway
 ridership.</p>
+<p><br></p>
 </div>
-<div id="related-work" class="section level2">
-<h2>Related Work</h2>
+<div id="related-work" class="section level1">
+<h1>Related Work</h1>
 <p>Our work builds on a rich tradition of urban analytics. Previous
 studies have looked at:</p>
 <ul>
-<li><strong>Weather &amp; Transit:</strong> Studies in cities like
+<li><p><strong>Weather &amp; Transit:</strong> Studies in cities like
 Chicago and London have established that rain reduces discretionary
 travel, while extreme cold has a non-linear “chilling” effect on
-ridership.</li>
-<li><strong>Event Impact:</strong> Transport agencies often use “special
-event schedules,” but granular, station-level impact analysis is often
-proprietary or retrospective.</li>
-<li><strong>P8105 Precedents:</strong> We drew inspiration from past
+ridership.</p></li>
+<li><p><strong>Event Impact:</strong> Transport agencies often use
+“special event schedules,” but granular, station-level impact analysis
+is often proprietary or retrospective.</p></li>
+<li><p><strong>P8105 Precedents:</strong> We drew inspiration from past
 projects like <em>Bikes in NYC</em> (Fall 2020), which successfully used
-spatial visualization to tell a story about transport usage.</li>
+spatial visualization to tell a story about transport usage.</p></li>
 </ul>
+<p><br></p>
 </div>
-<div id="initial-questions" class="section level2">
-<h2>Initial Questions</h2>
+<div id="initial-questions" class="section level1">
+<h1>Initial Questions</h1>
 <p>We started with broad questions that evolved into specific “data
 stories”:</p>
 <ol style="list-style-type: decimal">
@@ -424,210 +428,414 @@ equally?
 “fair-weather” friends?</li>
 </ul></li>
 </ol>
+<p><br></p>
 </div>
-<div id="data" class="section level2">
-<h2>Data</h2>
+<div id="data" class="section level1">
+<h1>Data</h1>
 <p>We synthesized data from four disparate sources to build a
 comprehensive <strong>Station-Hour</strong> and
 <strong>Station-Day</strong> panel for 2024-2025.</p>
+<div id="part-1-data-sources" class="section level2">
+<h2>Part 1: Data Sources</h2>
+<div id="mta-subway-hourly-ridership" class="section level3">
+<h3>1. MTA Subway Hourly Ridership:</h3>
+<p>The backbone of our analysis. We processed over <strong>1.9
+million</strong> hourly records for 123 Manhattan stations.</p>
+<p><strong>The Disaggregation Challenge:</strong></p>
+<p>The MTA ridership dataset is highly granular, designed to capture
+detailed fare collection patterns. Each hourly observation is
+disaggregated by:</p>
 <ul>
-<li><strong>MTA Subway Hourly Ridership:</strong> The backbone of our
-analysis. We processed over <strong>1.9 million</strong> hourly records
-for 123 Manhattan stations.
-<ul>
-<li><em>Challenge:</em> The raw data is massive (disaggregated by fare
-type).</li>
-<li><em>Solution:</em> We used Socrata API’s SoQL query language to
-perform server-side aggregation (<code>SUM(ridership)</code>) before
-downloading, reducing data volume by 96%.</li>
-</ul></li>
-<li><strong>NOAA Weather Data (Central Park):</strong> Daily temperature
-(<code>TMAX</code>), precipitation (<code>PRCP</code>), and snowfall
-(<code>SNOW</code>) from the Global Historical Climatology Network
-(GHCN).</li>
-<li><strong>NYC Permitted Events:</strong> A database of 150,000+
-permits. We filtered for “Major” events (parades, street closures) to
-isolate true disruptors.</li>
-<li><strong>Geospatial Data:</strong> Station coordinates allowed us to
-map the “Blast Radius” of events and visualize spatial patterns.</li>
+<li><strong>11+ fare class categories</strong>: Full Fare,
+Senior/Disabled, Students (K-12 and college), Fair Fares (reduced-income
+riders), and various pass types (7-day, 30-day, unlimited)</li>
+<li><strong>2 payment methods</strong>: MetroCard (legacy magnetic
+stripe) and OMNY (contactless tap-to-pay)</li>
 </ul>
-<div id="data-wrangling" class="section level3">
-<h3>Data Wrangling</h3>
-<p>We constructed two analysis-ready panels through the following
-pipeline:</p>
+<p>This level of granularity results in substantial data volume. For
+Manhattan’s 123 stations over a single week:</p>
+<p><strong>123 stations × 24 hours × 7 days × 11 fare categories × 2
+payment methods = 227,304 records per week</strong></p>
+<p>For the full 2024–2025 period (approximately 95 weeks), this expands
+to roughly 21.6 million records—far exceeding the Socrata API’s
+100,000-record pagination limit and creating file sizes that are
+impractical for routine analysis.</p>
+<p><strong>Our Solution:</strong></p>
+<p>Since our research questions focus on <em>total ridership</em> rather
+than fare type breakdowns, we utilized the Socrata API’s server-side
+aggregation functionality. By applying <code>SUM()</code> with
+<code>$group</code> (listed below), we aggregated across all fare types
+and payment methods <em>prior to</em> data transfer.</p>
+<pre class="r"><code># API aggregation code
+
+&quot;$select&quot; = &quot;transit_timestamp, station_complex_id, station_complex,
+             borough, SUM(ridership) as total_ridership&quot;
+
+&quot;$group&quot; = &quot;transit_timestamp, station_complex_id, station_complex, borough&quot;</code></pre>
+<p>This approach reduced the dataset size by approximately
+<strong>96%</strong> (from 21.6M to 1.92M), making monthly downloads
+feasible within API limits while preserving the station-hour granularity
+required for our weather and event analyses.</p>
+<p>The final dataset comprises <strong>1,921,163</strong> hourly
+observations across 123 Manhattan stations spanning from 2024-01-01 to
+2025-10-19.</p>
+</div>
+<div id="noaa-weather-data-central-park" class="section level3">
+<h3>2. NOAA Weather Data (Central Park):</h3>
+<p>Daily weather data were obtained from NOAA’s Global Historical
+Climatology Network (GHCN) via API access using an authentication token.
+Central Park was selected as the representative location to provide
+consistent weather measurements applicable across all Manhattan
+stations.</p>
+<p>The dataset contains <strong>2,151</strong> daily observations for
+the period 2020–2025, including maximum temperature, precipitation, and
+snowfall.</p>
+</div>
+<div id="nyc-permitted-events" class="section level3">
+<h3>3. NYC Permitted Events:</h3>
+<p>The NYC Permitted Event Information – Historical dataset (bkfu-528j)
+provides comprehensive records of permitted events. However, it also
+includes a large number of small-scale activities (e.g., youth sports,
+film shoots, farmers markets) that are unlikely to significantly
+influence subway ridership.</p>
+<p><strong>Filtering Strategy:</strong></p>
+<p>Since the dataset lacks attendance information, we applied a
+proxy-based approach to identify <strong>large events</strong>
+(estimated ≥ 100 participants) using event characteristics:</p>
 <ul>
-<li><strong>Panel Construction:</strong> Built station-hour (most
-granular) and station-day (aggregated) datasets by joining ridership
-with weather and event data.</li>
-<li><strong>Weather Features:</strong> Engineered binary indicators for
-<code>heatwave</code> (≥90°F for 3+ consecutive days) and
-<code>storm</code> (≥1 inch precipitation).</li>
-<li><strong>Event Matching:</strong> Geocoded event addresses to
-coordinates, then spatially joined to nearest stations within 800m
-radius.</li>
-<li><strong>Baseline Calculation:</strong> Defined each station’s
-baseline as median ridership by day-of-week and month to calculate
-percent change from expected values.</li>
+<li><strong>Event types</strong>: Parades, Athletic Races/Tours, Street
+Events, Block Parties, Sidewalk Sales</li>
+<li><strong>Street impact</strong>: Events requiring full street
+closures</li>
+<li><strong>Exclusions</strong>: Youth/adult sports leagues, production
+events, small farmers markets</li>
 </ul>
-<p>Full pipeline details are on the <a href="data.html">Data &amp;
-Methods</a> page.</p>
+<p>This filtering reduced the dataset from approximately 2 million total
+events to <strong>149,524 large-scale events</strong> across NYC from
+Jan 2024 to Oct 2025, including <strong>53,977</strong> in
+Manhattan.</p>
+</div>
+<div id="geospatial-data" class="section level3">
+<h3>4. Geospatial Data:</h3>
+<p>Station coordinates allowed us to map the “Blast Radius” of events
+and visualize the spatial patterns. As these coordinates are embedded
+within the ridership dataset, we extracted unique station complexes with
+their associated coordinates directly from the ridership API,
+eliminating the need for a separate geospatial source.</p>
+<p>We identified <strong>427</strong> unique station complexes across
+NYC, with <strong>123</strong> in Manhattan covering the entire borough
+from Battery Park to Inwood.</p>
 </div>
 </div>
-<div id="exploratory-analysis" class="section level2">
-<h2>Exploratory Analysis</h2>
+<div id="part-2-data-wrangling" class="section level2">
+<h2>Part 2: Data Wrangling</h2>
+<p>Our data wrangling process transforms raw inputs into structured
+panels suitable for analyzing subway ridership, weather conditions, and
+major NYC events. We began by ingesting raw datasets, standardizing
+column names, parsing timestamps, and filtering records to Manhattan for
+the 2024–2025 study period.</p>
+<p>The next step involved constructing the station-hour panel dataset
+(<code>panel_station_hour</code>), which served as the primary unit of
+analysis. For each station-day, we computed hours_present to identify
+potential gaps in hourly ridership data. For analysis requiring daily
+granularity, such as heatwave impact assessments, we aggregated
+ridership to the station-day level (<code>panel_station_day</code>).</p>
+<p>Weather features were integrated by merging daily observations and
+creating binary indicators for extreme conditions. Specifically, we
+defined <code>heatwave</code> as periods with maximum temperatures ≥ 90
+°F for consecutive days and <code>storm</code> as days with
+precipitation ≥ 1 inch. Event data underwent geocoding and spatial
+matching: large-scale Manhattan events were filtered, addresses were
+geocoded, and events were spatially joined to stations within an
+800-meter radius to flag affected station-hours and station-days.</p>
+<p>To account for altered ridership patterns on U.S. federal holidays,
+we incorporated holiday flags using the <code>timeDate</code> package.
+Finally, we calculated baseline ridership as the median for each station
+by day-of-week and month, capturing weekly and seasonal trends for
+percent-change analysis.</p>
+<p><br></p>
+</div>
+</div>
+<div id="exploratory-analysis" class="section level1">
+<h1>Exploratory Analysis</h1>
 <p>Our initial exploration revealed strong temporal and spatial patterns
-across our four datasets. Detailed visualizations are available on the
-<a href="data.html">Data &amp; Methods</a> page.</p>
-<div id="ridership-patterns" class="section level3">
-<h3>Ridership Patterns</h3>
-<ul>
-<li><strong>Daily Time Series:</strong> Manhattan daily ridership in
-2024 shows relatively stable patterns with dips around major holidays
-and occasional fluctuations.</li>
-<li><strong>Hourly Profiles:</strong> The classic “two-humped camel”
-shape of AM/PM peaks on weekdays contrasts sharply with the broad,
-single midday peak of weekends—revealing fundamentally different travel
-behaviors.</li>
-<li><strong>Station Rankings:</strong> The top 30 stations by total
-ridership reveal major transit hubs (Times Square, Penn Station, Grand
-Central) dominating system usage, with clear geographic clustering in
-Midtown.</li>
-</ul>
+across our four datasets.</p>
+<div id="ridership-patterns-for-manhattan" class="section level2">
+<h2>Ridership Patterns for Manhattan</h2>
+<p>Given that complete data is available for the entire year of 2024
+(with 2025 data currently covering only January through October), the
+exploratory analysis focuses on 2024 to provide a comprehensive annual
+perspective. The top 30 stations account for a substantial share of
+total ridership and exhibit clear geographic clustering around major
+transit hubs (such as Times Square, Grand Central, Penn Station) and
+Midtown, underscoring their roles as the core of Manhattan’s transit
+network. Overall, ridership in 2024 remained relatively stable
+throughout the year, with noticeable declines during major holidays and
+occasional short-term fluctuations. Hourly ridership profiles reveal
+distinct behavioral patterns between weekdays and weekends: weekdays
+display the characteristic “two-humped camel” shape, reflecting
+pronounced peaks during morning and evening commute periods, while
+weekends feature a broad, single midday peak, indicative of more
+leisure-oriented travel behavior.</p>
+<p><img src="images/data-plot_ridership-1.png"/></p>
+<p>System ridership exhibits a clear weekly rhythm, as shown in the time
+series and boxplot visualizations. Daily ridership fluctuates between
+approximately 0.8 million and 2.5 million trips, with consistent weekday
+peaks and weekend troughs. Monday through Friday maintain relatively
+high and stable volumes, with midweek days—particularly Wednesday and
+Thursday—showing the highest median ridership. In contrast, Saturday and
+Sunday experience significant declines, reflecting reduced commuting
+activity and a shift toward leisure travel. Seasonal trends are also
+evident, with overall ridership rising during summer months and dipping
+around major holidays and early January. These patterns underscore the
+strong influence of workweek structure and seasonal factors on transit
+demand.</p>
+<p><img src="images/model-baseline_plots-1.png"/></p>
 </div>
-<div id="weather-patterns" class="section level3">
-<h3>Weather Patterns</h3>
-<ul>
-<li><strong>Temperature and Precipitation:</strong> Time series plots
-show typical seasonal variation with summer heat waves and winter cold
-snaps, plus precipitation events throughout the year.</li>
-<li><strong>Seasonal Summary:</strong> We identified multiple heat days
-(≥90°F) concentrated in summer and storm events (≥1 inch precipitation)
-distributed throughout the study period.</li>
-</ul>
+<div id="weather-analysis-for-central-park" class="section level2">
+<h2>Weather Analysis for Central Park</h2>
+<p>Time series plots of temperature and precipitation reveal typical
+seasonal variability, characterized by summer heat waves and winter cold
+snaps, alongside precipitation events distributed throughout the year.
+Seasonal summaries further highlight these patterns: average
+temperatures peak in summer and reach their lowest in winter, while
+spring exhibits the highest frequency of storm events (≥ 1 inch
+precipitation). Heat days (≥ 90 °F) are concentrated in summer,
+reflecting periods of extreme warmth, whereas significant precipitation
+events occur across all seasons, with notable clustering in spring.
+These findings underscore the interplay between temperature extremes and
+precipitation variability in shaping seasonal weather dynamics.</p>
+<p><img src="images/data-plot_weather-1.png"/></p>
 </div>
-<div id="event-patterns" class="section level3">
-<h3>Event Patterns</h3>
-<ul>
-<li><strong>Temporal Distribution:</strong> Large permitted events show
-strong seasonality—summer and fall peaks with winter lows—reflecting
-NYC’s outdoor event calendar.</li>
-<li><strong>Event Types:</strong> Block parties, street fairs, and
-athletic events dominate Manhattan’s large event landscape.</li>
-</ul>
+<div id="large-permitted-events-temporal-and-typological-patterns"
+class="section level2">
+<h2>Large Permitted Events: Temporal and Typological Patterns</h2>
+<p>Analysis of large permitted events reveals pronounced seasonality,
+with activity peaking in summer and fall and reaching its lowest levels
+during winter months. This trend aligns closely with New York City’s
+outdoor event calendar, where favorable weather conditions drive higher
+event volumes in warmer seasons. In terms of event composition, block
+parties, street fairs, and athletic events dominate Manhattan’s
+large-event landscape, reflecting the borough’s emphasis on community
+engagement and recreational activities.</p>
+<p><img src="images/data-plot_events-1.png"/></p>
 </div>
-<div id="spatial-distribution" class="section level3">
-<h3>Spatial Distribution</h3>
-<ul>
-<li><strong>Station Map:</strong> Mapping total ridership by station
-reveals the concentration of activity in Midtown and the Financial
-District, with ridership intensity decreasing toward the Upper Manhattan
-neighborhoods.</li>
-</ul>
-<hr />
+<div id="spatial-distribution-of-ridership" class="section level2">
+<h2>Spatial Distribution of Ridership</h2>
+<p>Mapping total ridership by station reveals a clear spatial
+concentration of transit activity within Manhattan. The highest
+ridership levels are observed in Midtown and the Financial District,
+reflecting their roles as major employment and commercial hubs.
+Ridership intensity declines progressively toward Upper Manhattan
+neighborhoods, indicating a strong centralization of transit demand
+around core business and tourism areas. This spatial pattern underscores
+the importance of Midtown and Downtown stations in sustaining overall
+system performance and highlights geographic disparities in transit
+utilization.</p>
+<p><img src="images/data-plot_stations-1.png"/></p>
+<p><br></p>
 </div>
 </div>
-<div id="statistical-analyses" class="section level2">
-<h2>Statistical Analyses</h2>
+<div id="formal-statistical-analysis" class="section level1">
+<h1>Formal Statistical Analysis</h1>
 <p>Building on the exploratory patterns above, we developed four
 targeted statistical analyses to quantify weather and event impacts on
-ridership (detailed on the <a href="model.html">Analysis</a> page).</p>
-<div id="story-1-the-goldilocks-zone" class="section level3">
-<h3>Story 1: The Goldilocks Zone</h3>
-<p>Using a <strong>Generalized Additive Model (GAM)</strong>, we found
-that the relationship between weather and ridership is
-<strong>non-linear</strong>, with temperature and precipitation
-interacting to shape commuter behavior.</p>
+ridership.</p>
+<div id="story-1-the-goldilocks-zone" class="section level2">
+<h2>Story 1: The Goldilocks Zone</h2>
+<p>To examine whether subway ridership peaks within a comfortable
+temperature range, we modeled the relationship between weather
+conditions and ridership using a Generalized Additive Model (GAM). This
+approach captures non-linear effects while controlling for other factors
+such as day of week and month:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Ridership} \sim &amp; \; s(\text{Temperature}) \\
+&amp; + s(\text{Precipitation}) \\
+&amp; + s(\text{Snowfall}) \\
+&amp; + \text{Day of Week} + \text{Month}
+\end{aligned}
+\]</span></p>
+<p>The heatmap below illustrates the combined influence of temperature
+and precipitation on ridership, expressed as percentage change from the
+average, holding other factors constant.</p>
+<p><img src="images/model-story1_gam-1.png"/></p>
+<p><strong>Key Findings</strong></p>
 <ul>
-<li><strong>The “Comfort Zone”:</strong> Ridership peaks between
-<strong>60°F and 75°F</strong> on dry days.</li>
-<li><strong>Rain Sensitivity:</strong> Precipitation has a stronger
-marginal effect than temperature—a half-inch of rain causes more
-ridership loss than a 20°F temperature swing.</li>
-<li><strong>The Worst Conditions:</strong> Cold + wet days see the
-steepest drops (20-35% below average), while hot dry days show only
-modest declines. New Yorkers will sweat, but they won’t freeze.</li>
+<li><p><strong>Optimal Zone (Bottom Center, Red):</strong> Ridership
+peaks 4–6% above average on mild, dry days around 67 °F, confirming the
+“Goldilocks” hypothesis. These conditions are most conducive to walking
+to stations.</p></li>
+<li><p><strong>Cold + Wet (Upper Left, Deep Blue):</strong> Ridership
+declines sharply—20–35% below average—under frigid, rainy conditions, as
+commuters avoid uncomfortable outdoor travel.</p></li>
+<li><p><strong>Hot Days (Bottom Right):</strong> Even on dry days,
+temperatures above 85 °F reduce ridership by 3–5%, suggesting heat
+discourages discretionary trips.</p></li>
+<li><p><strong>Precipitation Effect (Moving Up):</strong> Each inch of
+rainfall corresponds to a 5–10% decline in ridership, regardless of
+temperature. Contour lines indicate precipitation exerts a stronger
+marginal impact than temperature; for example, a half-inch of rain
+reduces ridership more than a 20 °F swing within the moderate
+range.</p></li>
+</ul>
+<p>These results underscore the importance of weather resilience
+strategies for transit systems, particularly in mitigating the impact of
+precipitation.</p>
+</div>
+<div id="story-2-the-blast-radius-of-mega-events"
+class="section level2">
+<h2>Story 2: The “Blast Radius” of Mega-Events</h2>
+<p>To assess whether major events influence ridership citywide or
+primarily along event routes, we analyzed two iconic 2024 events: the
+NYC Marathon (November 3) and the Pride March (June 30). For each
+station, event-day ridership was compared against a baseline of typical
+Sundays, defined as the median of all non-holiday Sundays in surrounding
+months. The results were mapped to visualize percentage changes
+geographically.</p>
+<p><img src="images/model-story2_events-1.png"/></p>
+<p><strong>Key Findings</strong></p>
+<ul>
+<li><p><strong>NYC Marathon:</strong> Ridership surged at stations near
+the finish line (Columbus Circle, 59 St) and along the route through the
+Upper East Side and Harlem. Conversely, some stations adjacent to closed
+streets experienced declines due to restricted access.</p></li>
+<li><p><strong>Pride March:</strong> The impact was highly concentrated
+in the West Village and Chelsea, with ridership spiking by more than 50%
+at stations such as Christopher St–Sheridan Sq and 14 St. Midtown
+stations remained largely unaffected, indicating a concentrated
+effect.</p></li>
+</ul>
+<p>These patterns confirm that the “Blast Radius” is real but
+geographically distinct. Event planning could benefit from
+station-specific service adjustments rather than system-wide changes,
+ensuring resources are allocated where demand shifts most
+significantly.</p>
+</div>
+<div id="story-3-station-personality-profiles" class="section level2">
+<h2>Story 3: Station Personality Profiles</h2>
+<p>To assess whether subway stations exhibit uniform usage patterns, we
+applied K-means clustering to hourly ridership profiles. This analysis
+identified two distinct station archetypes based on temporal demand.
+Notably, the geographic distribution of these clusters echoes the
+clustering results remarkably well—stations of the same type tend to
+cluster spatially, reflecting the underlying land use patterns of
+Manhattan neighborhoods.</p>
+<p><img src="images/model-story3_clustering-1.png"/></p>
+<p><img src="images/model-story3_map-1.png"/></p>
+<p><strong>Key Findings</strong></p>
+<ul>
+<li><p><strong>Residential Stations (43 stations):</strong> Residential
+stations (red) are primarily located in the Upper West Side, Upper East
+Side, and uptown, exhibiting strong morning peaks as commuters begin
+their day.</p></li>
+<li><p><strong>Commercial Stations (112 stations):</strong> Commercial
+stations (blue) dominate Midtown and Lower Manhattan, including major
+hubs such as Grand Central, Bryant Park, Rockefeller Center, and the
+Financial District. These stations show a gradual buildup throughout the
+day, culminating in a pronounced evening peak between 5:00–7:00 PM, with
+elevated activity persisting into late evening due to departures from
+offices, restaurants, and entertainment venues.</p></li>
+<li><p><strong>Notable Exceptions in Midtown:</strong> A few red
+stations in Midtown—such as Penn Station and Times Square—display
+morning-peak patterns not because they are residential, but because they
+serve as major entry points for commuters arriving from New Jersey and
+Long Island. Roosevelt Island is a true residential neighborhood,
+reinforcing this classification.</p></li>
+<li><p><strong>Unique Uptown Commercial Station:</strong> 168 St stands
+out as the only Commercial station in Uptown Manhattan. Its profile
+reflects its role as a major transfer hub and destination for medical
+facilities, distinguishing it from surrounding residential
+stations.</p></li>
+<li><p><strong>Special Case: Roosevelt Island:</strong> Roosevelt Island
+includes two stations—Roosevelt Island (F) and Roosevelt Island
+Tramway—that fall into different clusters. The F train station behaves
+like a Residential station, with strong morning peaks as residents
+commute to Manhattan. In contrast, the Tramway shows a Commercial-like
+pattern, with higher activity later in the day, likely driven by
+visitors and leisure trips.</p></li>
 </ul>
 </div>
-<div id="story-2-the-event-blast-radius" class="section level3">
-<h3>Story 2: The Event Blast Radius</h3>
-<p>We mapped the station-level percent change in ridership during the
-<strong>NYC Marathon</strong> and <strong>Pride March</strong>.</p>
+<div id="story-4-rain-sensitivity-by-hour" class="section level2">
+<h2>Story 4: Rain Sensitivity by Hour</h2>
+<p>To understand how precipitation affects subway ridership throughout
+the day, we analyzed hourly patterns of ridership change on rainy days
+relative to dry-day baselines. This analysis highlights when commuters
+are most likely to alter their travel behavior in response to adverse
+weather.</p>
+<p><img src="images/model-story4_rain_hour-1.png"/></p>
+<p><strong>Key Findings</strong></p>
 <ul>
-<li><strong>Marathon:</strong> Created a linear “corridor of activity”
-along the Upper West Side and 1st Avenue.</li>
-<li><strong>Pride:</strong> Showed an intense, concentrated “hotspot” in
-the West Village, with some stations seeing surges of &gt;50% above
-baseline.</li>
-<li>This confirms that “Citywide” events are often geographically
-specific phenomena.</li>
+<li><p><strong>Morning Commute Most Impacted:</strong> Ridership
+declines sharply during the morning peak (7:00–9:00 AM), with reductions
+of 20–30%. This suggests that commuters facing strict arrival deadlines
+are more likely to switch to alternatives such as taxis, rideshares, or
+remote work when rain occurs.</p></li>
+<li><p><strong>Afternoon and Evening Less Sensitive:</strong> Ridership
+drops are smaller in the afternoon and evening (approximately 5–18%),
+reflecting greater flexibility among travelers to delay trips until
+conditions improve.</p></li>
+<li><p><strong>Operational Implication:</strong> The MTA should
+anticipate reduced demand during the morning rush on rainy days and
+consider adjusting service levels accordingly, while maintaining
+relatively stable service during later periods.</p></li>
 </ul>
-</div>
-<div id="story-3-station-personalities" class="section level3">
-<h3>Story 3: Station Personalities</h3>
-<p>We used <strong>K-Means Clustering</strong> on hourly ridership
-profiles to classify stations by commute flow direction.</p>
-<ul>
-<li><strong>Residential Stations:</strong> Sharp morning peaks as
-commuters leave their neighborhoods.</li>
-<li><strong>Commercial Stations:</strong> Evening peaks as workers leave
-offices to head home.</li>
-<li><strong>Geographic Pattern:</strong> Commercial stations cluster in
-Midtown and the Financial District, while Residential stations dominate
-the Upper West Side and Upper East Side. Transit hubs like Penn Station
-and Times Square show Residential patterns despite their Midtown
-location.</li>
-</ul>
-</div>
-<div id="story-4-rain-sensitivity-by-hour" class="section level3">
-<h3>Story 4: Rain Sensitivity by Hour</h3>
-<p>We analyzed how rain sensitivity varies throughout the day.</p>
-<ul>
-<li><strong>Morning Rush Most Sensitive:</strong> Ridership drops 20-30%
-during 7-9 AM on rainy days—commuters switch to alternatives due to
-strict arrival deadlines.</li>
-<li><strong>Evening More Resilient:</strong> Afternoon/evening shows
-smaller drops (5-18%) because travelers can wait for rain to stop.</li>
-<li><strong>MTA Implication:</strong> Service adjustments should focus
-on morning rush demand reductions on rainy days.</li>
-</ul>
+<p><br></p>
 </div>
 </div>
-<div id="discussion" class="section level2">
-<h2>Discussion</h2>
-<p>Our findings paint a picture of a transit system that is deeply
-intertwined with the physical and social environment of the city.</p>
-<ul>
-<li><strong>Resilience:</strong> The system is remarkably resilient to
-heat but vulnerable to cold.</li>
-<li><strong>Temporal Patterns:</strong> Morning commuters are most
-sensitive to rain due to strict work deadlines, while evening travelers
-can wait for weather to clear.</li>
-<li><strong>Station Identity:</strong> The Residential/Commercial
-classification reveals how Manhattan’s geography shapes commute
-flows—workers flow inward in the morning and outward in the
-evening.</li>
-<li><strong>Event Planning:</strong> The “Blast Radius” maps could help
-the MTA target service increases more precisely—sending extra trains not
-just “to Manhattan” but specifically to the 1/2/3 lines during the
-Marathon or the A/C/E during Pride.</li>
-</ul>
-<p><strong>Limitations:</strong></p>
-<ul>
-<li><strong>Manhattan Focus:</strong> We limited our scope to Manhattan.
-The outer boroughs likely show different “Commuter” dynamics.</li>
-<li><strong>Events Data:</strong> “Permitted Events” is a noisy dataset.
-We had to manually curate major events to filter out block parties.</li>
-</ul>
+<div id="discussion" class="section level1">
+<h1>Discussion</h1>
+<p>Our study examined how weather conditions, major events, and station
+characteristics influence subway ridership in Manhattan. The findings
+confirm that ridership is highly context-dependent. Mild, dry days
+correspond to peak demand, while extreme temperatures and precipitation
+significantly reduce ridership, with rain exerting the strongest
+marginal effect. Large-scale events such as the NYC Marathon and Pride
+March create localized surges near event routes rather than system-wide
+disruptions. Station-level analysis revealed distinct “personalities”:
+residential stations peak sharply in the morning, while commercial
+stations peak in the evening and maintain elevated activity later into
+the night. Additionally, rain sensitivity varies by hour, with the
+steepest declines during the morning commute, suggesting that
+time-of-day flexibility influences behavioral responses to adverse
+weather.</p>
+<p>These results largely align with expectations but provide some
+nuanced insights. For example, the magnitude of morning ridership
+decline on rainy days—up to 30%—was greater than anticipated, and the
+strong clustering of event impacts challenges assumptions about citywide
+disruption. These patterns underscore the need for targeted operational
+strategies, such as adjusting service during rainy mornings and event
+corridors, and incorporating station-specific profiles into demand
+forecasting models.</p>
+<p>Several limitations should be acknowledged. Firstly, due to data size
+limitation, our analysis was limited to Manhattan; patterns in outer
+boroughs may differ significantly and could reveal additional commuter
+dynamics. Secondly, the “Permitted Events” dataset is inherently noisy,
+requiring manual curation to isolate major events and filter out smaller
+activities such as block parties. Finally, weather data was sourced from
+a single location (Central Park), which may not fully capture
+microclimate variations across Manhattan.</p>
+<p>In summary, this project explored how extreme weather conditions and
+large-scale events reshape the rhythms of New York City’s subway system.
+By integrating ridership, weather, and event data into a unified
+analytical framework, we uncovered clear patterns: ridership peaks under
+mild, dry conditions, declines sharply during storms, and responds in
+highly localized ways to major events. Our findings highlight the
+importance of weather resilience and event-specific planning for urban
+transit systems. While the analysis was limited to Manhattan and relied
+on certain data simplifications, the approach demonstrates the value of
+combining temporal, spatial, and contextual factors to understand and
+manage complex urban mobility dynamics.</p>
+<p><br></p>
 </div>
-<div id="references" class="section level2">
-<h2>References</h2>
-<ol style="list-style-type: decimal">
-<li>MTA Open Data. <em>Subway Hourly Ridership</em>.</li>
-<li>NOAA National Centers for Environmental Information. <em>GHCN-Daily
-(Central Park)</em>.</li>
-<li>NYC Open Data. <em>NYC Permitted Event Information</em>.</li>
-<li>P8105 Course Materials &amp; Past Projects.</li>
-</ol>
+<div id="acknowledgment" class="section level1">
+<h1>Acknowledgment</h1>
+<p>This project was completed as a final project for <a
+href="https://p8105.com/">Data Science I (P8105)</a>. We gratefully
+acknowledge the guidance and feedback provided by Professor Jeff
+Goldsmith, as well as the instruction and support from all TAs
+throughout the course, including Xiaoni Xu, whose suggestions and
+assistance were particularly valuable for this project.</p>
 </div>
 
 <div class="footer" style="text-align: center; margin-top: 80px; padding: 60px 20px; border-top: 3px solid #ddd; background-color: #f5f5f5;">
