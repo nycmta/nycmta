@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- MTA Blue circle background -->
+  <circle cx="16" cy="16" r="15" fill="#0039A6"/>
+  <!-- White border -->
+  <circle cx="16" cy="16" r="15" fill="none" stroke="white" stroke-width="1.5"/>
+  <!-- MTA text -->
+  <text x="16" y="21" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">MTA</text>
+</svg>

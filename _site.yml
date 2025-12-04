@@ -1,5 +1,6 @@
-name: "NYC MTA Subway Ridership Analysis"
+name: "The Pulse of NYC: Weather, Events, and the Subway"
 output_dir: "."
+favicon: favicon.svg
 navbar:
   title: "NYC Subway & Weather"
   left:
