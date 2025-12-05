@@ -687,7 +687,7 @@ The final datasets (`panel_station_day` and `panel_station_hour`) are exported a
 
 ---
 
-# Part 3: Loading the Prepared Dataset
+# Data Guide
 
 For users who want to skip the data wrangling process and jump directly into analysis, we provide pre-built Parquet files in the `data/derived/` directory. These files contain the fully processed panel datasets ready for modeling and visualization.
 
@@ -807,25 +807,3 @@ panel_station_day |>
 - **Filter early**: Apply `filter()` before `summarize()` to reduce computation
 - **Choose the right granularity**: Use station-day for most analyses; only load station-hour when hourly resolution is required
 
----
-
-# Summary
-
-```{r summary_stats, include=FALSE}
-total_ridership_millions <- sum(ridership$total_ridership, na.rm=TRUE) / 1e6
-heatwave_days <- sum(weather$TMAX >= 90 & year(weather$date) >= 2024, na.rm=TRUE)
-storm_days <- sum(weather$PRCP >= 1 & year(weather$date) >= 2024, na.rm=TRUE)
-manhattan_events <- sum(events_analysis$borough == "Manhattan", na.rm=TRUE)
-```
-
-Our integrated dataset provides comprehensive coverage of Manhattan subway ridership and its potential drivers:
-
-**Ridership:** `r format(nrow(ridership), big.mark=",")` hourly observations across `r n_distinct(ridership$station_complex_id)` Manhattan stations (January 2024–October 2025), totaling over `r round(total_ridership_millions)` million rides.
-
-**Weather:** `r format(nrow(weather), big.mark=",")` daily observations from Central Park (2020-2025), including `r heatwave_days` heat wave days (≥90°F) and `r storm_days` major storm events (≥1 inch precipitation) during our study period.
-
-**Events:** `r format(nrow(events), big.mark=",")` large permitted events covering 2024-2025, with `r format(manhattan_events, big.mark=",")` in Manhattan. Events show strong seasonality (summer/fall peaks) and include major NYC happenings.
-
-**Stations:** Complete geospatial coverage of `r nrow(manhattan_stations)` Manhattan subway stations, enabling spatial analysis of ridership patterns and proximity-based event impacts.
-
-All four datasets align temporally and spatially, providing comprehensive infrastructure for analyzing **weather and event impacts** on station-level subway ridership across Manhattan's 22-month study period.
